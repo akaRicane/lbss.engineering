@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>You are home!</div>
+      <div>Welcome to lbss.engineering!</div>
       <Link href="/about">go to about</Link>
     </main>
   );
