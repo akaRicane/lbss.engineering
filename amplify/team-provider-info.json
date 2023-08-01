@@ -1,0 +1,25 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify44622f3fec7c4-staging-165938-authRole",
+      "UnauthRoleArn": "arn:aws:iam::414420991943:role/amplify-amplify44622f3fec7c4-staging-165938-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::414420991943:role/amplify-amplify44622f3fec7c4-staging-165938-authRole",
+      "Region": "eu-west-3",
+      "DeploymentBucketName": "amplify-amplify44622f3fec7c4-staging-165938-deployment",
+      "UnauthRoleName": "amplify-amplify44622f3fec7c4-staging-165938-unauthRole",
+      "StackName": "amplify-amplify44622f3fec7c4-staging-165938",
+      "StackId": "arn:aws:cloudformation:eu-west-3:414420991943:stack/amplify-amplify44622f3fec7c4-staging-165938/cd219970-308c-11ee-bbf4-0ebb88cfaab2",
+      "AmplifyAppId": "d3p1v4gsdxkamv"
+    },
+    "categories": {
+      "auth": {
+        "engineeringclient": {
+          "nativeClientId": "tkvgptmjadt5ct5vup80sse4d",
+          "userPoolId": "eu-west-3_KS9gEe3VT",
+          "userPoolName": "lbss-cloud-userpool",
+          "webClientId": "tkvgptmjadt5ct5vup80sse4d"
+        }
+      }
+    }
+  }
+}
