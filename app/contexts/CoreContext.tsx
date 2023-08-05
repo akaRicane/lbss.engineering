@@ -5,14 +5,12 @@ import { createContext, useState, useContext, ReactNode } from "react";
 
 type coreContextType = {
   counter: number;
-  setCounter: () => void;
   getCounter: () => void;
   updateCounter: () => void;
 };
 
 const coreContextDefaultValues: coreContextType = {
   counter: 0,
-  setCounter: () => {},
   getCounter: () => {},
   updateCounter: () => {},
 };

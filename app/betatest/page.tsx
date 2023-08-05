@@ -9,14 +9,19 @@ const Betatest = () => {
   const [myNumber, setMyNumber] = useState(0);
   const { counter, updateCounter, getCounter } = useCoreContext();
 
+  const handleMouseOver = (props: string): void => {
+    console.log("hovered")
+  };
+
   useEffect(() => {
     console.log("Building betatest bitch");
+
   }, []);
 
   return (
     <div>
       <p>Counter: {counter}</p>
-      <button onClick={updateCounter}>prout</button>
+      <button id='my-btn' onMouseOver={handleMouseOver} onClick={updateCounter}>myBtn</button>
     </div>
   );
 };
