@@ -1,7 +1,7 @@
 // context: CoreContext
 "use client";
 
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 
 type coreContextType = {
   counter: number;
@@ -30,10 +30,10 @@ type Props = {
 export const CoreContextProvider = ({ children }: Props) => {
   const [counter, setCounter] = useState<number>(0);
   const updateCounter = (): void => {
-    setCounter(prev => prev += 1)
-  }
+    setCounter((prev) => (prev += 1));
+  };
   const getCounter = (): void => {
-    console.log('getCounter');
+    console.log("getCounter");
   };
 
   // Wrap the values in an object
