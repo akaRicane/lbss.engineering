@@ -1,4 +1,4 @@
-// context: CoreContext
+// context: template
 "use client";
 
 import { createContext, useState, useContext } from "react";
