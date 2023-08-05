@@ -4,10 +4,11 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-12">
-      <div>Welcome to lbss.engineering!</div>
-      <div>work in progress</div>
-      <Link href="/about">go to about</Link>
+    <main>
+      <div className="flex flex-col">
+        <Link href="/products">products</Link>
+        <Link href="/about">go to about</Link>
+      </div>
     </main>
   );
 }
