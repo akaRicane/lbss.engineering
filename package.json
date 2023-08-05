@@ -3,7 +3,8 @@
   "version": "0.2.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "ts-lint": "npx tsc --noEmit --watch --incremental",
+    "dev": "npm run ts-lint & npx next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

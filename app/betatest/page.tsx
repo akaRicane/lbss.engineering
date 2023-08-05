@@ -1,15 +1,15 @@
 // page: betatest
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 
 const Betatest = () => {
-  
+
   const [myNumber, setMyNumber] = useState(0);
   const { counter, updateCounter, getCounter } = useCoreContext();
 
-  const handleMouseOver = (props: string): void => {
+  const handleMouseOver = (props: React.MouseEvent<HTMLButtonElement>): void => {
     console.log("hovered")
   };
 
