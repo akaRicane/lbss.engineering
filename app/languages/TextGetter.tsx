@@ -23,6 +23,7 @@ const TEXT_BOOK: TextBookType = {
   },
   "LINK_TO_PRODUCTS": {
     'en': 'To products',
+    'fr': 'Voir les produits',
   },
   "#PRODUCTS_PRESENTATION": {
     'en': 'Product lorem ipsum',
@@ -30,12 +31,19 @@ const TEXT_BOOK: TextBookType = {
   },
   "LINK_TO_ASTAR": {
     'en': 'To ASTAR',
+    'fr': 'Aller à ASTAR',
   },
   "LINK_TO_LBSSCLOUD": {
     'en': 'To LBSS CLOUD',
+    'fr': 'Aller à LBSS CLOUD',
   },
   "LINK_TO_ABOUT": {
     'en': 'To about',
+    'fr': 'En savoir plus',
+  },
+  "LINK_TO_LBSSART": {
+    'en': 'visit lbss.art website',
+    'fr': 'jette un oeil à lbss.art',
   },
   "FAIL_TEXT": {
     'en': 'Fail!',

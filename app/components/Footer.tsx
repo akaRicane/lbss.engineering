@@ -25,9 +25,9 @@ const Footer = () => {
       <HoveredLink linkID='LINK_TO_BETATEST' linkTarget='/betatest'></HoveredLink>
       <div>
         <small>Language: {currentLanguage}</small>
-        <button onClick={() => handleUpdateLanguage("fr")}>🇫🇷</button>
         <button onClick={() => handleUpdateLanguage("en")}>🇺🇸</button>
-        <button onClick={() => handleUpdateLanguage("it")}>🇮🇹</button>
+        <button onClick={() => handleUpdateLanguage("fr")}>🇫🇷</button>
+        {/* <button onClick={() => handleUpdateLanguage("it")}>🇮🇹</button> */}
       </div>
       <small>{version}</small>
     </main>

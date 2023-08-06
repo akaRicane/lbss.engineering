@@ -6,7 +6,7 @@ export default function About() {
   return (
     <main>
       <div>
-        <HoveredLink linkID='visit lbss.art website' linkTarget="http://www.lbss.art"></HoveredLink>
+        <HoveredLink linkID='LINK_TO_LBSSART' linkTarget="http://www.lbss.art"></HoveredLink>
       </div>
     </main>
   );
