@@ -4,10 +4,10 @@
 import { createContext, useState, useContext, ReactNode } from "react";
 import { useLanguageContext } from "./LanguageContext";
 import TextGetter from "../languages/TextGetter";
-import { version } from "../../package.json";
 
 type HoveredHTML = string | null;
 type coreContextType = {
+  version: string;
   counter: number;
   updateCounter: () => void;
   currentMouseOver: HoveredHTML;
@@ -17,6 +17,7 @@ type coreContextType = {
 };
 
 const coreContextDefaultValues: coreContextType = {
+  version: '0.0.1',
   counter: 0,
   updateCounter: () => {},
   currentMouseOver: null,
@@ -40,6 +41,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   const { currentLanguage } = useLanguageContext();
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
+  const version: string = '0.2.1';
 
   const updateCounter = (): void => {
     setCounter((prev) => (prev += 1));
