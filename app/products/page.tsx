@@ -1,12 +1,13 @@
 // page: products
 import Link from "next/link";
+import HoveredButton from '../components/HoveredButton';
 
 const Products = () => {
   return (
     <main>
       <div>Products</div>
-      <div>ASTAR</div>
-      <div>LBSS CLOUD</div>
+      <HoveredButton btnID="ASTAR">ASTAR</HoveredButton>
+      <HoveredButton btnID="LBSS CLOUD">LBSS CLOUD</HoveredButton>
     </main>
   );
 };
