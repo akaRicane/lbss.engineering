@@ -1,9 +1,9 @@
 // page: home
 'use client'
 
-import Link from "next/link";
 import { useCoreContext } from "./contexts/CoreContext";
 import HoveredButton from './components/HoveredButton';
+import HoveredLink from './components/HoveredLink';
 
 export default function Home() {
 
@@ -12,9 +12,9 @@ export default function Home() {
   return (
     <main>
       <div className="flex flex-col">
-        <Link href="/products">products</Link>
-        <Link href="/about">go to about</Link>
         <p>Counter: {counter}</p>
+        <HoveredLink linkID='products' linkTarget='/products'></HoveredLink>
+        <HoveredLink linkID='about' linkTarget='/about'></HoveredLink>
       </div>
     </main>
   );

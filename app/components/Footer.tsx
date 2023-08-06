@@ -2,8 +2,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Link from "next/link";
 import { useLanguageContext } from '../contexts/LanguageContext';
+import HoveredLink from "./HoveredLink";
 
 const Footer = () => {
 
@@ -11,8 +11,8 @@ const Footer = () => {
 
   return (
     <main className="flex flex-col bg-blue-200">
-      <Link href='/'>home</Link>
-      <Link href='/betatest'>betatest</Link>
+      <HoveredLink linkID='home' linkTarget='/'></HoveredLink>
+      <HoveredLink linkID='betatest' linkTarget='/betatest'></HoveredLink>
       <div>
         <p>Language: {currentLanguage}</p>
         <button onClick={() => updateCurrentLanguage("fr")}>🇫🇷</button>

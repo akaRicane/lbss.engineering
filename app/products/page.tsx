@@ -1,5 +1,5 @@
 // page: products
-import Link from "next/link";
+
 import HoveredButton from '../components/HoveredButton';
 
 const Products = () => {

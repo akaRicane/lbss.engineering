@@ -1,12 +1,12 @@
 // page: about
 
-import Link from "next/link";
+import HoveredLink from "../components/HoveredLink";
 
 export default function About() {
   return (
     <main>
       <div>
-        visit <Link href="http://www.lbss.art">lbss.art website</Link>
+        <HoveredLink linkID='visit lbss.art website' linkTarget="http://www.lbss.art"></HoveredLink>
       </div>
     </main>
   );
