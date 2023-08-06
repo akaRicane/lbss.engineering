@@ -13,8 +13,8 @@ export default function Home() {
     <main>
       <div className="flex flex-col">
         <p>Counter: {counter}</p>
-        <HoveredLink linkID='products' linkTarget='/products'></HoveredLink>
-        <HoveredLink linkID='about' linkTarget='/about'></HoveredLink>
+        <HoveredLink linkID='LINK_TO_PRODUCTS' linkTarget='/products'></HoveredLink>
+        <HoveredLink linkID='LINK_TO_ABOUT' linkTarget='/about'></HoveredLink>
       </div>
     </main>
   );

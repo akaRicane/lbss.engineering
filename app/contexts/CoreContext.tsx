@@ -45,7 +45,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   };
 
   const updateCurrentMouseOver = (htmlElemName: HoveredHTML): void => {
-    setCurrentMouseOver(htmlElemName === null ? getText("HEADER_WELCOME") : htmlElemName);
+    setCurrentMouseOver(htmlElemName === null ? getText("HEADER_WELCOME") : getText(htmlElemName));
   }
 
   const resetCurrentMouseOver = (): void => {

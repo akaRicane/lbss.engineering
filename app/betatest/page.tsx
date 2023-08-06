@@ -4,6 +4,7 @@
 import React, { useEffect } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 import HoveredButton from "../components/HoveredButton";
+import HoveredLink from "../components/HoveredLink";
 
 const Betatest = () => {
 
@@ -12,9 +13,6 @@ const Betatest = () => {
   return (
     <div>
       <p>Counter: {counter}</p>
-      <HoveredButton btnID="zeBtn"></HoveredButton>
-      <HoveredButton btnID="proute"></HoveredButton>
-      <HoveredButton btnID="zebi"></HoveredButton>
       <button onClick={updateCounter}>update counter</button>
     </div>
   );

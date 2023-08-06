@@ -5,8 +5,9 @@ import { useCoreContext } from "../contexts/CoreContext";
 
 const HoveredButton = (props: any) => {
 
-  const [btnId, setBtnId] = useState<string>('noname');
-  const { updateCurrentMouseOver, resetCurrentMouseOver } = useCoreContext();
+  const [btnId, setBtnId] = useState<string>('');
+  const [btnText, setBtnText] = useState<string>('');
+  const { updateCurrentMouseOver, resetCurrentMouseOver, getText } = useCoreContext();
 
   const handleMouseOver = (): void => {
     updateCurrentMouseOver(btnId);
@@ -17,12 +18,14 @@ const HoveredButton = (props: any) => {
   };
 
   useEffect(() => {
-    setBtnId(props.btnID ? props.btnID : "noname");
+    setBtnId(props.btnID);
+    setBtnText(getText(props.btnID));
   }, [])
+
   
   return (
     <>
-      <button id={btnId} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{btnId}</button>
+      <button id={btnId} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{btnText}</button>
       <br/>
     </>
   )

@@ -6,9 +6,10 @@ import Link from 'next/link';
 
 const HoveredLink = (props: any) => {
 
-  const [linkId, setLinkId] = useState<string>('noname');
+  const [linkId, setLinkId] = useState<string>('');
   const [linkTarget, setLinkTarget] = useState<string>('/');
-  const { updateCurrentMouseOver, resetCurrentMouseOver } = useCoreContext();
+  const [linkText, setLinkText] = useState<string>('');
+  const { updateCurrentMouseOver, resetCurrentMouseOver, getText } = useCoreContext();
 
   const handleMouseOver = (): void => {
     updateCurrentMouseOver(linkId);
@@ -19,14 +20,14 @@ const HoveredLink = (props: any) => {
   };
 
   useEffect(() => {
-    setLinkId(props.linkID ? props.linkID : "noname");
+    setLinkId(props.linkID);
     setLinkTarget(props.linkTarget ? props.linkTarget : "/");
-    console.log(props);
+    setLinkText(getText(props.linkID));
   }, [])
   
   return (
     <>
-      <Link href={linkTarget} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{linkId}</Link>
+      <Link id={linkId} href={linkTarget} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{linkText}</Link>
       <br/>
     </>
   )
