@@ -8,7 +8,6 @@ import HoveredLink from "./HoveredLink";
 
 const Footer = () => {
 
-  const [hotLanguage, setHotLanguage] = useState<string | null>('en');
   const { currentLanguage, updateCurrentLanguage } = useLanguageContext();
   const { getText } = useCoreContext();
 
