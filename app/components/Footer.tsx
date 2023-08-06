@@ -9,11 +9,10 @@ import HoveredLink from "./HoveredLink";
 const Footer = () => {
 
   const { currentLanguage, updateCurrentLanguage } = useLanguageContext();
-  const { getText } = useCoreContext();
+  const { getText, version } = useCoreContext();
 
   const handleUpdateLanguage = (props: string): void => {
     updateCurrentLanguage(props);
-    setHotLanguage(props);
     const home = document.getElementById('LINK_TO_HOME');
     const betatest = document.getElementById('LINK_TO_BETATEST');
     home !== null ? home.textContent = getText('LINK_TO_HOME') : null;
@@ -25,11 +24,12 @@ const Footer = () => {
       <HoveredLink linkID='LINK_TO_HOME' linkTarget='/'></HoveredLink>
       <HoveredLink linkID='LINK_TO_BETATEST' linkTarget='/betatest'></HoveredLink>
       <div>
-        <p>Language: {currentLanguage}</p>
+        <small>Language: {currentLanguage}</small>
         <button onClick={() => handleUpdateLanguage("fr")}>🇫🇷</button>
         <button onClick={() => handleUpdateLanguage("en")}>🇺🇸</button>
         <button onClick={() => handleUpdateLanguage("it")}>🇮🇹</button>
       </div>
+      <small>{version}</small>
     </main>
   );
 };

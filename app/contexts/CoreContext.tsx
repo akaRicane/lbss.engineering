@@ -4,6 +4,7 @@
 import { createContext, useState, useContext, ReactNode } from "react";
 import { useLanguageContext } from "./LanguageContext";
 import TextGetter from "../languages/TextGetter";
+import { version } from "../../package.json";
 
 type HoveredHTML = string | null;
 type coreContextType = {
@@ -63,7 +64,8 @@ export const CoreContextProvider = ({ children }: Props) => {
     currentMouseOver,
     updateCurrentMouseOver,
     resetCurrentMouseOver,
-    getText
+    getText,
+    version
   };
 
   return (
