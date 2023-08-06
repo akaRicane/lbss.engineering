@@ -6,8 +6,8 @@ const Products = () => {
   return (
     <main>
       <div>Products</div>
-      <HoveredButton btnID="ASTAR">ASTAR</HoveredButton>
-      <HoveredButton btnID="LBSS CLOUD">LBSS CLOUD</HoveredButton>
+      <HoveredButton btnID="ASTAR"></HoveredButton>
+      <HoveredButton btnID="LBSS CLOUD"></HoveredButton>
     </main>
   );
 };

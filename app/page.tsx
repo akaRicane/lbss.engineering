@@ -6,6 +6,7 @@ import { useCoreContext } from "./contexts/CoreContext";
 import HoveredButton from './components/HoveredButton';
 
 export default function Home() {
+
   const { counter } = useCoreContext();
 
   return (

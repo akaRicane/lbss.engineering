@@ -2,6 +2,8 @@
 "use client";
 
 import { createContext, useState, useContext, ReactNode } from "react";
+import { useLanguageContext } from "./LanguageContext";
+import TextGetter from "../languages/TextGetter";
 
 type HoveredHTML = string | null;
 type coreContextType = {
@@ -9,6 +11,8 @@ type coreContextType = {
   updateCounter: () => void;
   currentMouseOver: HoveredHTML;
   updateCurrentMouseOver: (htmlElemName: HoveredHTML) => void;
+  resetCurrentMouseOver: () => void;
+  getText: (props: string) => string;
 };
 
 const coreContextDefaultValues: coreContextType = {
@@ -16,6 +20,8 @@ const coreContextDefaultValues: coreContextType = {
   updateCounter: () => {},
   currentMouseOver: null,
   updateCurrentMouseOver: (htmlElemName) => {},
+  resetCurrentMouseOver: () => {},
+  getText: (props) => { return 'fail'},
 };
 
 const CoreContext = createContext<coreContextType>(coreContextDefaultValues);
@@ -30,6 +36,7 @@ type Props = {
 
 
 export const CoreContextProvider = ({ children }: Props) => {
+  const { currentLanguage } = useLanguageContext();
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
 
@@ -38,7 +45,15 @@ export const CoreContextProvider = ({ children }: Props) => {
   };
 
   const updateCurrentMouseOver = (htmlElemName: HoveredHTML): void => {
-    setCurrentMouseOver(htmlElemName === null ? 'Welcome to lbss.engineering!' : htmlElemName);
+    setCurrentMouseOver(htmlElemName === null ? getText("HEADER_WELCOME") : htmlElemName);
+  }
+
+  const resetCurrentMouseOver = (): void => {
+    setCurrentMouseOver(getText("HEADER_WELCOME"));
+  }
+
+  const getText = (props: string): string => {
+    return TextGetter(props, currentLanguage);
   }
 
   // Wrap the values in an object
@@ -46,7 +61,9 @@ export const CoreContextProvider = ({ children }: Props) => {
     counter,
     updateCounter,
     currentMouseOver,
-    updateCurrentMouseOver
+    updateCurrentMouseOver,
+    resetCurrentMouseOver,
+    getText
   };
 
   return (
