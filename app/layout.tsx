@@ -13,11 +13,7 @@ export const metadata: Metadata = {
   description: "lbss.engineering client",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   console.clear();
   return (
     <html lang="en">

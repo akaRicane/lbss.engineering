@@ -6,8 +6,7 @@ import { useCoreContext } from "../contexts/CoreContext";
 import "../styles/components.header.footer.css";
 
 const Header = () => {
-  const { currentMouseOver, updateCurrentMouseOver, getText } =
-    useCoreContext();
+  const { currentMouseOver, updateCurrentMouseOver, getText } = useCoreContext();
 
   return (
     <main className="header">

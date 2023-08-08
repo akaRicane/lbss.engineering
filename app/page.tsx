@@ -15,10 +15,7 @@ export default function Home() {
         <p>Counter: {counter}</p>
       </div>
       <div className="centered-element">
-        <HoveredLink
-          linkID="LINK_TO_PRODUCTS"
-          linkTarget="/products"
-        ></HoveredLink>
+        <HoveredLink linkID="LINK_TO_PRODUCTS" linkTarget="/products"></HoveredLink>
         <HoveredLink linkID="LINK_TO_ABOUT" linkTarget="/about"></HoveredLink>
       </div>
     </main>

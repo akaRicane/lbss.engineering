@@ -7,7 +7,6 @@ import HoveredButton from "../components/HoveredButton";
 import HoveredLink from "../components/HoveredLink";
 
 const Betatest = () => {
-
   const { counter, updateCounter } = useCoreContext();
 
   return (
@@ -19,4 +18,3 @@ const Betatest = () => {
 };
 
 export default Betatest;
-

@@ -9,7 +9,7 @@ type languageContextType = {
 };
 
 const languageContextDefaultValue: languageContextType = {
-  currentLanguage: 'en',
+  currentLanguage: "en",
   updateCurrentLanguage: () => {},
 };
 
@@ -23,14 +23,13 @@ type Props = {
   children: ReactNode;
 };
 
-const AUTHORIZED_LANGUAGES = ['en', 'fr'];
+const AUTHORIZED_LANGUAGES = ["en", "fr"];
 
 export const LanguageContextProvider = ({ children }: Props) => {
-
-  const [currentLanguage, setCurrentLanguage] = useState<string>('en');
+  const [currentLanguage, setCurrentLanguage] = useState<string>("en");
 
   const updateCurrentLanguage = (languageTarget: string): void => {
-    setCurrentLanguage(AUTHORIZED_LANGUAGES.includes(languageTarget) ? languageTarget : 'en');
+    setCurrentLanguage(AUTHORIZED_LANGUAGES.includes(languageTarget) ? languageTarget : "en");
   };
 
   // Wrap the values in an object
@@ -39,9 +38,5 @@ export const LanguageContextProvider = ({ children }: Props) => {
     updateCurrentLanguage,
   };
 
-  return (
-    <LanguageContext.Provider value={contextValues}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={contextValues}>{children}</LanguageContext.Provider>;
 };

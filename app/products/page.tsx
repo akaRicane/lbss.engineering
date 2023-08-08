@@ -1,11 +1,10 @@
 // page: products
 "use client";
 
-import { useCoreContext } from '../contexts/CoreContext';
-import HoveredButton from '../components/HoveredButton';
+import { useCoreContext } from "../contexts/CoreContext";
+import HoveredButton from "../components/HoveredButton";
 
 const Products = () => {
-
   const { getText } = useCoreContext();
 
   return (

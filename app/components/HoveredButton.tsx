@@ -7,8 +7,7 @@ import "../styles/components.hovered.css";
 const HoveredButton = (props: any) => {
   const [btnId, setBtnId] = useState<string>("");
   const [btnText, setBtnText] = useState<string>("");
-  const { updateCurrentMouseOver, resetCurrentMouseOver, getText } =
-    useCoreContext();
+  const { updateCurrentMouseOver, resetCurrentMouseOver, getText } = useCoreContext();
 
   const handleMouseOver = (): void => {
     updateCurrentMouseOver(btnId);
@@ -25,12 +24,7 @@ const HoveredButton = (props: any) => {
 
   return (
     <>
-      <button
-        id={btnId}
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
-        className="hovered-button"
-      >
+      <button id={btnId} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="hovered-button">
         {btnText}
       </button>
     </>

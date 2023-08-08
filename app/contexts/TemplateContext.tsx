@@ -28,7 +28,6 @@ type Props = {
   children: ReactNode;
 };
 
-
 export const CoreContextProvider = ({ children }: Props) => {
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
@@ -38,20 +37,16 @@ export const CoreContextProvider = ({ children }: Props) => {
   };
 
   const updateCurrentMouseOver = (htmlElemName: HoveredHTML): void => {
-    setCurrentMouseOver(htmlElemName === null ? 'Welcome to lbss.engineering!' : htmlElemName);
-  }
+    setCurrentMouseOver(htmlElemName === null ? "Welcome to lbss.engineering!" : htmlElemName);
+  };
 
   // Wrap the values in an object
   const contextValues = {
     counter,
     updateCounter,
     currentMouseOver,
-    updateCurrentMouseOver
+    updateCurrentMouseOver,
   };
 
-  return (
-    <CoreContext.Provider value={contextValues}>
-      {children}
-    </CoreContext.Provider>
-  );
+  return <CoreContext.Provider value={contextValues}>{children}</CoreContext.Provider>;
 };
