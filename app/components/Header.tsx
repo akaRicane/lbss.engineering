@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <main className="header">
-      <p>{currentMouseOver ? currentMouseOver : getText("HEADER_WELCOME", language)}</p>
+      <p className="rolling-text">{currentMouseOver ? currentMouseOver : getText("HEADER_WELCOME", language)}</p>
     </main>
   );
 };

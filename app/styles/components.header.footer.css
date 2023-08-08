@@ -3,9 +3,27 @@
   height: 50px;
   background-color: var(--bgn-color-2);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
+}
+
+.rolling-text {
+  background-color: transparent;
+  display: inline-block;
+  animation: roll 15s linear infinite;
+  width: 100%;
+  text-align: center;
+}
+
+@keyframes roll {
+  from {
+    transform: translateX(75%);
+  }
+  to {
+    transform: translateX(-75%);
+  }
 }
 
 .footer {
