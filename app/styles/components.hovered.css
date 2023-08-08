@@ -1,0 +1,10 @@
+.hovered-button,
+.hovered-link {
+  color: var(--text-color-link);
+}
+
+.hovered-button:hover,
+.hovered-link:hover {
+  color: var(--text-hover-link);
+  background-color: var(--bgn-hover-link);
+}

@@ -1,13 +1,12 @@
-// page: home
+// page: root
+"use client";
 
-import Link from "next/link";
+import Home from "./components/Home";
 
-export default function Home() {
+export default function Root() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-12">
-      <div>Welcome to lbss.engineering!</div>
-      <div>work in progress</div>
-      <Link href="/about">go to about</Link>
-    </main>
+    <>
+      <Home></Home>
+    </>
   );
 }
