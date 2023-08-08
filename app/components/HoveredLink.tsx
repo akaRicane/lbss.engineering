@@ -5,7 +5,7 @@ import { useCoreContext } from "../contexts/CoreContext";
 import Link from "next/link";
 import "../styles/components.hovered.css";
 
-const HoveredLink = (props: any) => {
+const HoveredLink = (parentProps: any) => {
   const [linkId, setLinkId] = useState<string>("");
   const [linkTarget, setLinkTarget] = useState<string>("/");
   const [linkText, setLinkText] = useState<string>("");
@@ -20,10 +20,10 @@ const HoveredLink = (props: any) => {
   };
 
   useEffect(() => {
-    setLinkId(props.linkID);
-    setLinkTarget(props.linkTarget ? props.linkTarget : "/");
-    setLinkText(getText(props.linkID));
-  }, []);
+    setLinkId(parentProps.linkID);
+    setLinkTarget(parentProps.linkTarget ? parentProps.linkTarget : "/");
+    setLinkText(getText(parentProps.linkID, parentProps.language));
+  }, [parentProps]);
 
   return (
     <>

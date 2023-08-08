@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 import "../styles/components.hovered.css";
 
-const HoveredButton = (props: any) => {
+const HoveredButton = (parentProps: any) => {
   const [btnId, setBtnId] = useState<string>("");
   const [btnText, setBtnText] = useState<string>("");
   const { updateCurrentMouseOver, resetCurrentMouseOver, getText } = useCoreContext();
@@ -18,9 +18,9 @@ const HoveredButton = (props: any) => {
   };
 
   useEffect(() => {
-    setBtnId(props.btnID);
-    setBtnText(getText(props.btnID));
-  }, []);
+    setBtnId(parentProps.btnID);
+    setBtnText(getText(parentProps.btnID, parentProps.language));
+  }, [parentProps]);
 
   return (
     <>

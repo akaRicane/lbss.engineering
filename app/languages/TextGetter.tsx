@@ -1,7 +1,3 @@
-"use client";
-
-import { useLanguageContext } from "../contexts/LanguageContext";
-
 type TextBookType = {
   [key: string]: {
     [key: string]: string;
@@ -59,9 +55,9 @@ export default function TextGetter(props: string, language: string = "en"): stri
     } else {
       fetched = TEXT_BOOK[props]["en"];
     }
-    // console.log(`Query ${props} ${language}`, 'Found', fetched);
+    // console.log(`Query ${props} ${language}`, "Found", fetched);
   } else {
-    console.log(`Fail to fetch query ${props} ${language}`);
+    // console.log(`Fail to fetch query ${props} ${language}`);
   }
 
   return fetched;

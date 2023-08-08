@@ -1,13 +1,19 @@
 // page: about
+"use client";
 
+import { useCoreContext } from "../contexts/CoreContext";
 import HoveredLink from "../components/HoveredLink";
 
-export default function About() {
+const About = () => {
+  const { language } = useCoreContext();
+
   return (
     <main>
       <div>
-        <HoveredLink linkID="LINK_TO_LBSSART" linkTarget="http://www.lbss.art"></HoveredLink>
+        <HoveredLink linkID="LINK_TO_LBSSART" linkTarget="http://www.lbss.art" language={language}></HoveredLink>
       </div>
     </main>
   );
-}
+};
+
+export default About;

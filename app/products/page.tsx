@@ -5,13 +5,13 @@ import { useCoreContext } from "../contexts/CoreContext";
 import HoveredButton from "../components/HoveredButton";
 
 const Products = () => {
-  const { getText } = useCoreContext();
+  const { getText, language } = useCoreContext();
 
   return (
     <main>
-      <div>{getText("#PRODUCTS_PRESENTATION")}</div>
-      <HoveredButton btnID="LINK_TO_ASTAR"></HoveredButton>
-      <HoveredButton btnID="LINK_TO_LBSSCLOUD"></HoveredButton>
+      <div>{getText("#PRODUCTS_PRESENTATION", language)}</div>
+      <HoveredButton btnID="LINK_TO_ASTAR" language={language}></HoveredButton>
+      <HoveredButton btnID="LINK_TO_LBSSCLOUD" language={language}></HoveredButton>
     </main>
   );
 };
