@@ -48,7 +48,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   const [language, setLanguage] = useState<string>("en");
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
-  const version: string = "0.2.1";
+  const version: string = "0.2.2";
 
   const updateLanguage = (newLanguage: string): void => {
     setLanguage(newLanguage);

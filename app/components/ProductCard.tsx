@@ -1,6 +1,7 @@
 // component: Product Card
 "use client";
 
+import Link from "next/link";
 import HoveredLink from "./HoveredLink";
 import "../styles/components.productCard.css";
 
@@ -14,9 +15,10 @@ need:
 
 const ProductCard = (props: any) => {
   return (
-    <div className="product-card">
+    <Link className="product-card" href={props.linkTarget} id={props.linkID}>
+      <p className="card-title">{props.title}</p>
       <p>{props.bodyContent}</p>
-    </div>
+    </Link>
   );
 };
 
