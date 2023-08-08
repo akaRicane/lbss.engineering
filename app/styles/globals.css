@@ -3,24 +3,29 @@
 @tailwind utilities;
 
 :root {
-  --text-color-1: rgb(93, 0, 81);
-  --text-color-link: rgb(184, 72, 24);
+  --text-color-1: rgb(255, 255, 255);
+  --text-color-2: rgb(0, 0, 0);
+  --text-color-link: rgb(217, 0, 241);
   --bgn-color-1: rgb(0, 0, 0);
-  --bgn-color-2: rgb(0, 0, 0);
-  --text-hover-link: rgb(255, 255, 255);
-  --bgn-hover-link: var(--text-color-1);
+  --bgn-color-2: rgb(240, 200, 0);
+  --text-hover-link: var(--text-color-1);
+  --bgn-hover-link: var(--text-color-link);
   font-size: medium;
+  font-weight: bold;
   text-transform: uppercase;
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
   color: var(--text-color-1);
   background-color: var(--bgn-color-1);
   overflow: hidden;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
 }
 
 .centered-element {
@@ -28,4 +33,17 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
 }

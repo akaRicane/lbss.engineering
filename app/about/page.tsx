@@ -8,7 +8,7 @@ const About = () => {
   const { language } = useCoreContext();
 
   return (
-    <main>
+    <main className="page">
       <div>
         <HoveredLink linkID="LINK_TO_LBSSART" linkTarget="http://www.lbss.art" language={language}></HoveredLink>
       </div>

@@ -6,15 +6,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  white-space: nowrap;
 }
 
 .rolling-text {
-  background-color: transparent;
-  display: inline-block;
-  animation: roll 15s linear infinite;
   width: 100%;
   text-align: center;
+  display: inline-block;
+  animation: roll 15s linear infinite;
+  background-color: transparent;
 }
 
 @keyframes roll {
@@ -29,9 +28,6 @@
 .footer {
   width: 100vw;
   height: 50px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
   background-color: var(--bgn-color-2);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
