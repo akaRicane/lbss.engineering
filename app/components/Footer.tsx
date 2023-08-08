@@ -12,7 +12,7 @@ const Footer = () => {
     <main className="footer">
       <div className="centered-element">
         <div>
-          <small>Language: {language}</small>
+          <small>Language {language} </small>
           <button onClick={() => updateLanguage("en")}>🇺🇸</button>
           <button onClick={() => updateLanguage("fr")}>🇫🇷</button>
         </div>

@@ -10,6 +10,7 @@
   --bgn-color-2: rgb(240, 200, 0);
   --text-hover-link: var(--text-color-1);
   --bgn-hover-link: var(--text-color-link);
+  --threshold-mobile: 400px;
   font-size: medium;
   font-weight: bold;
   text-transform: uppercase;
@@ -46,4 +47,19 @@ body {
   justify-content: center;
   align-items: center;
   overflow-y: auto;
+}
+
+@media (max-width: 400px) {
+  :root {
+    font-size: small;
+    overflow-y: hidden;
+  }
+
+  body {
+    max-height: 100vh;
+  }
+
+  .page {
+    max-height: 100%;
+  }
 }
