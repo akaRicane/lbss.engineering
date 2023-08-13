@@ -22,7 +22,7 @@ const Footer = () => {
       </div>
       <div className="centered-element">
         <small>{version}</small>
-        <HoveredLink linkID="LINK_TO_BETATEST" linkTarget="/betatest" language={language}></HoveredLink>
+        {/* <HoveredLink linkID="LINK_TO_BETATEST" linkTarget="/betatest" language={language}></HoveredLink> */}
       </div>
     </main>
   );

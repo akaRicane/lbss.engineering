@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="home">
       <div className="centered-element">
-        <p>Counter: {counter}</p>
+        <p>Welcome</p>
       </div>
       <div className="centered-element">
         <HoveredLink linkID="LINK_TO_PRODUCTS" linkTarget="/products" language={language}></HoveredLink>

@@ -1,17 +1,29 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 import EnvGetter from "../components/EnvGetter";
 import "../styles/page.products.css";
 
 const Account = () => {
   const { tokenId } = useCoreContext();
+  const [isConnected, setIsConnected] = useState(false);
+
+  const handleOnClickLogin = () => {
+    const loginUrl = EnvGetter("ENGINE_API_LOGIN_URL");
+
+    if (loginUrl) {
+      window.location.assign(loginUrl);
+    } else {
+      console.error("ENGINE_API_LOGIN_URL is not defined in the environment variables.");
+    }
+  };
 
   useEffect(() => {
     const apiUrl = EnvGetter("ENGINE_API_URL");
+
     if (tokenId) {
-      console.log(`${apiUrl}/ping`, tokenId);
+      // console.log(`Fetching ${apiUrl}/ping`);
       fetch(`${apiUrl}/ping`, {
         method: "GET",
         headers: {
@@ -20,16 +32,30 @@ const Account = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          const body = JSON.parse(data.body);
+          // console.log("Connection", body);
+          if (body !== "success") {
+            setIsConnected(false);
+          } else {
+            setIsConnected(true);
+          }
         });
     } else {
-      console.log("no tokenid, ping not sent");
+      console.log("no token id, ping not sent");
+      setIsConnected(false);
     }
-  }, [tokenId]);
+  }, [isConnected, tokenId]);
 
   return (
     <div className="page">
-      <p>Token id: {tokenId ? tokenId : "null"}</p>
+      {isConnected ? (
+        <p className="break-words text-xs max-w-2xl">Token id: {tokenId ? tokenId : "null"}</p>
+      ) : (
+        <div>
+          <button onClick={handleOnClickLogin}>login</button>
+          <p>Not connected</p>
+        </div>
+      )}
     </div>
   );
 };
