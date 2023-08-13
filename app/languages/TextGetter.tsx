@@ -22,8 +22,8 @@ const TEXT_BOOK: TextBookType = {
     fr: "Voir les produits",
   },
   "#PRODUCTS_PRESENTATION": {
-    en: "Product lorem ipsum",
-    fr: "Mes balls sur la commode",
+    en: "Our products",
+    fr: "Nos solutions",
   },
   LINK_TO_ASTAR: {
     en: "To ASTAR",
@@ -39,7 +39,7 @@ const TEXT_BOOK: TextBookType = {
   },
   LINK_TO_ACCOUNT: {
     en: "My account",
-    fr: "Mon profile",
+    fr: "Mon profil",
   },
   LINK_TO_LBSSART: {
     en: "visit lbss.art website",
