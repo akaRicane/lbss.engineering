@@ -37,6 +37,10 @@ const TEXT_BOOK: TextBookType = {
     en: "To about",
     fr: "En savoir plus",
   },
+  LINK_TO_ACCOUNT: {
+    en: "My account",
+    fr: "Mon profile",
+  },
   LINK_TO_LBSSART: {
     en: "visit lbss.art website",
     fr: "jette un oeil à lbss.art",
