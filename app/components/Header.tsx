@@ -2,13 +2,14 @@
 "use client";
 
 import { useCoreContext } from "../contexts/CoreContext";
+import EnvGetter from "../components/EnvGetter";
 import "../styles/components.header.footer.css";
 
 const Header = () => {
   const { getText, currentMouseOver, language } = useCoreContext();
 
   const handleOnClickLogin = () => {
-    const loginUrl = process.env.ENGINE_API_LOGIN_URL;
+    const loginUrl = EnvGetter("ENGINE_API_LOGIN_URL");
 
     if (loginUrl) {
       window.location.assign(loginUrl);
