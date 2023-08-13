@@ -23,7 +23,7 @@ const HoveredLink = (parentProps: any) => {
     setLinkId(parentProps.linkID);
     setLinkTarget(parentProps.linkTarget ? parentProps.linkTarget : "/");
     setLinkText(getText(parentProps.linkID, parentProps.language));
-  }, [parentProps]);
+  }, [parentProps, getText]);
 
   return (
     <>

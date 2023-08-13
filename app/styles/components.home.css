@@ -1,7 +1,17 @@
 .home {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
   width: 100%;
   height: 100%;
   font-size: xx-large;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+@media (max-width: 400px) {
+  .home {
+    font-size: large;
+    max-height: 100vh;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr;
+  }
 }

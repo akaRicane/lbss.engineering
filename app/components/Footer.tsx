@@ -12,7 +12,7 @@ const Footer = () => {
     <main className="footer">
       <div className="centered-element">
         <div>
-          <small>Language: {language}</small>
+          <small>Language {language} </small>
           <button onClick={() => updateLanguage("en")}>🇺🇸</button>
           <button onClick={() => updateLanguage("fr")}>🇫🇷</button>
         </div>
@@ -22,7 +22,7 @@ const Footer = () => {
       </div>
       <div className="centered-element">
         <small>{version}</small>
-        <HoveredLink linkID="LINK_TO_BETATEST" linkTarget="/betatest" language={language}></HoveredLink>
+        {/* <HoveredLink linkID="LINK_TO_BETATEST" linkTarget="/betatest" language={language}></HoveredLink> */}
       </div>
     </main>
   );

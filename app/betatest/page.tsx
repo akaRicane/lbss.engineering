@@ -9,7 +9,7 @@ const Betatest = () => {
   const { counter, updateCounter } = useCoreContext();
 
   return (
-    <div>
+    <div className="page">
       <p>Counter: {counter}</p>
       <button onClick={updateCounter}>update counter</button>
     </div>

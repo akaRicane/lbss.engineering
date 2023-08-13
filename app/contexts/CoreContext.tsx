@@ -7,10 +7,13 @@ import TextGetter from "../languages/TextGetter";
 import { useEffect } from "react";
 
 type HoveredHTML = string | null;
+type TokenId = string | null;
 type coreContextType = {
   version: string;
   counter: number;
   updateCounter: () => void;
+  tokenId: TokenId;
+  updateTokenId: (newToken: TokenId) => void;
   language: string;
   updateLanguage: (newLanguage: string) => void;
   currentMouseOver: HoveredHTML;
@@ -23,6 +26,8 @@ const coreContextDefaultValues: coreContextType = {
   version: "0.0.1",
   counter: 0,
   updateCounter: () => {},
+  tokenId: null,
+  updateTokenId: (newToken) => {},
   language: "en",
   updateLanguage: (newLanguage) => {},
   currentMouseOver: null,
@@ -46,12 +51,17 @@ type Props = {
 export const CoreContextProvider = ({ children }: Props) => {
   const { currentLanguage } = useLanguageContext();
   const [language, setLanguage] = useState<string>("en");
+  const [tokenId, setTokenId] = useState<TokenId>(null);
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
-  const version: string = "0.2.1";
+  const version: string = "0.2.2";
 
   const updateLanguage = (newLanguage: string): void => {
     setLanguage(newLanguage);
+  };
+
+  const updateTokenId = (newToken: TokenId): void => {
+    setTokenId(newToken);
   };
 
   const updateCounter = (): void => {
@@ -78,6 +88,8 @@ export const CoreContextProvider = ({ children }: Props) => {
   const contextValues = {
     language,
     updateLanguage,
+    tokenId,
+    updateTokenId,
     counter,
     updateCounter,
     currentMouseOver,
