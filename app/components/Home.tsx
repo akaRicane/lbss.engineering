@@ -8,7 +8,7 @@ import Sketcher from "./Sketcher";
 import "../styles/components.home.css";
 
 export default function Home() {
-  const { language, counter } = useCoreContext();
+  const { language } = useCoreContext();
 
   return (
     <main className="home">

@@ -51,7 +51,7 @@ const TEXT_BOOK: TextBookType = {
   },
 };
 
-export default function TextGetter(props: string, language: string = "en"): string {
+export function TextGetter(props: string, language: string = "en"): string {
   var fetched = "fail";
   if (TEXT_BOOK[props]) {
     if (TEXT_BOOK[props][language]) {
@@ -65,4 +65,13 @@ export default function TextGetter(props: string, language: string = "en"): stri
   }
 
   return fetched;
+}
+
+export function getKeyFromMessage(message: string, language: string = "en"): string | undefined {
+  for (const key in TEXT_BOOK) {
+    if (TEXT_BOOK[key][language] === message) {
+      return key;
+    }
+  }
+  return undefined; // Return undefined if no key matches the provided message
 }

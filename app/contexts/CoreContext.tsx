@@ -3,7 +3,7 @@
 
 import { createContext, useState, useContext, useEffect, ReactNode } from "react";
 import { useLanguageContext } from "./LanguageContext";
-import TextGetter from "../languages/TextGetter";
+import { TextGetter } from "../languages/TextGetter";
 import EnvGetter from "../components/EnvGetter";
 import * as jose from "jose";
 
