@@ -9,21 +9,21 @@ const Sketcher = ({ sketch }: { sketch: string }) => {
   const { getText, language, currentMouseOver } = useCoreContext();
   const [curSketch, setCurSketch] = useState("threedems");
 
-  useEffect(() => {
-    // @ts-ignore
-    switch (getKeyFromMessage(currentMouseOver, language)) {
-      case "LINK_TO_PRODUCTS":
-        setCurSketch("poc");
-        break;
+  // useEffect(() => {
+  //   // @ts-ignore
+  //   switch (getKeyFromMessage(currentMouseOver, language)) {
+  //     case "LINK_TO_PRODUCTS":
+  //       setCurSketch("threedems");
+  //       break;
 
-      case "LINK_TO_ABOUT":
-        setCurSketch("threedems");
-        break;
-    }
-  }, [currentMouseOver, language]);
+  //     case "LINK_TO_ABOUT":
+  //       setCurSketch("threedems");
+  //       break;
+  //   }
+  // }, [currentMouseOver, language]);
 
   return (
-    <div>
+    <div className="-z-10 w-full h-full fixed top-0 left-0 right-0">
       <iframe src={`./creative/${curSketch}/index.html`} className="w-full h-full"></iframe>
     </div>
   );
