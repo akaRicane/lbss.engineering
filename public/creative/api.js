@@ -8,7 +8,7 @@ let ISPRODUCTS = false;
 let ISABOUT = false;
 let ISACCOUNT = false;
 let CLICK = { isClick: false, x: 0, y: 0 };
-let WHEEL = { isWheel: false, deltaX: 0, deltaY: 0 };
+let WHEEL = { isWheel: false, deltaX: 0, deltaY: 0, wheelPositionX : 0,wheelPositionY : 0};
 let CURSOR = { x: 0, y: 0 };
 
 window.addEventListener("message", (event) => {
@@ -23,7 +23,8 @@ window.addEventListener("message", (event) => {
       CLICK = { isClick: true, x: EVENT.message.x, x: EVENT.message.y };
       break;
     case "wheel":
-      WHEEL = { isWheel: true, deltaX: EVENT.message.deltaX, deltaY: EVENT.message.deltaY };
+
+      WHEEL = { isWheel: true, deltaX: EVENT.message.deltaX, deltaY: EVENT.message.deltaY, wheelPositionX :  WHEEL.wheelPositionX + EVENT.message.deltaX,wheelPositionY :  WHEEL.wheelPositionY + EVENT.message.deltaY};
       break;
     case "mouseOver":
       switch (EVENT.message) {

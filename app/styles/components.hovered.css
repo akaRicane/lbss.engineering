@@ -1,10 +1,10 @@
 .hovered-button,
 .hovered-link {
-  color: var(--text-color-link);
+  color: var(--text-color-1);
 }
 
 .hovered-button:hover,
 .hovered-link:hover {
-  color: var(--text-hover-link);
+  color: var(--bgn-color-2);
   /* background-color: var(--bgn-hover-link); */
 }
