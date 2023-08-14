@@ -25,12 +25,20 @@ const Sketcher = ({ sketch }: { sketch: string }) => {
       });
     });
     window.addEventListener("wheel", (event) => {
-      // console.log(event);
       sendToCreative({
         target: "wheel",
         message: {
           deltaX: event.deltaX,
           deltaY: event.deltaY,
+        },
+      });
+    });
+    window.addEventListener("resize", () => {
+      sendToCreative({
+        target: "resize",
+        message: {
+          width: window.innerWidth,
+          height: window.innerHeight,
         },
       });
     });
