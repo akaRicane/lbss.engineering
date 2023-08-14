@@ -29,6 +29,14 @@ const TEXT_BOOK: TextBookType = {
     en: "Our products",
     fr: "Nos solutions",
   },
+  "#PRODUCTS_PRESENTATION_ASTAR": {
+    en: "hello i am a good software to do some creative coding and live performances !! Buy me please !",
+    fr: "je suis Astar, le gentil logiciel trop cool",
+  },
+  "#PRODUCTS_PRESENTATION_LBSSCLOUD": {
+    en: "work in progress ...",
+    fr: "encore en cours de développement!",
+  },
   LINK_TO_ASTAR: {
     en: "To ASTAR",
     fr: "Aller à ASTAR",
