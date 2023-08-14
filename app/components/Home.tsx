@@ -1,7 +1,6 @@
 // component: Home
 "use client";
 
-import { useEffect } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 import HoveredButton from "../components/HoveredButton";
 import HoveredLink from "../components/HoveredLink";

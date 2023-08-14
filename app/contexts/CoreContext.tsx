@@ -5,14 +5,18 @@ import { createContext, useState, useContext, ReactNode } from "react";
 import { useLanguageContext } from "./LanguageContext";
 import TextGetter from "../languages/TextGetter";
 import { useEffect } from "react";
+import * as jose from "jose";
 
 type HoveredHTML = string | null;
+
 type TokenId = string | null;
+
 type coreContextType = {
   version: string;
   counter: number;
   updateCounter: () => void;
   tokenId: TokenId;
+  getTokenId: () => TokenId;
   updateTokenId: (newToken: TokenId) => void;
   language: string;
   updateLanguage: (newLanguage: string) => void;
@@ -27,6 +31,9 @@ const coreContextDefaultValues: coreContextType = {
   counter: 0,
   updateCounter: () => {},
   tokenId: null,
+  getTokenId: () => {
+    return null;
+  },
   updateTokenId: (newToken) => {},
   language: "en",
   updateLanguage: (newLanguage) => {},
@@ -54,14 +61,21 @@ export const CoreContextProvider = ({ children }: Props) => {
   const [tokenId, setTokenId] = useState<TokenId>(null);
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
-  const version: string = "0.2.2";
+  const version: string = "0.2.3";
 
   const updateLanguage = (newLanguage: string): void => {
     setLanguage(newLanguage);
   };
 
+  const getTokenId = (): TokenId => {
+    const localStored = localStorage.getItem("tokenId");
+    return tokenId || localStored;
+  };
+
   const updateTokenId = (newToken: TokenId): void => {
     setTokenId(newToken);
+    // @ts-ignore
+    localStorage.setItem("tokenId", newToken);
   };
 
   const updateCounter = (): void => {
@@ -82,13 +96,26 @@ export const CoreContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     updateLanguage(currentLanguage);
-  }, []);
+    const currentStoredToken = localStorage.getItem("tokenId");
+    if (currentStoredToken) {
+      const tokenObject = jose.decodeJwt(currentStoredToken);
+      const authTime = tokenObject.auth_time || 0;
+      const currentTime = Date.now();
+      const cacheDuration = 1 * 60 * 60 * 1000; // 1 hour in milliseconds
+      // @ts-ignore
+      const delta = currentTime - authTime * 1000; // Convert auth_time to milliseconds
+      if (delta > cacheDuration) {
+        localStorage.removeItem("tokenId");
+      }
+    }
+  }, [currentLanguage]);
 
   // Wrap the values in an object
   const contextValues = {
     language,
     updateLanguage,
     tokenId,
+    getTokenId,
     updateTokenId,
     counter,
     updateCounter,

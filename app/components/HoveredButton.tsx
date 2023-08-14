@@ -20,7 +20,7 @@ const HoveredButton = (parentProps: any) => {
   useEffect(() => {
     setBtnId(parentProps.btnID);
     setBtnText(getText(parentProps.btnID, parentProps.language));
-  }, [parentProps]);
+  }, [parentProps, getText]);
 
   return (
     <>
