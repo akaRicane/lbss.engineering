@@ -1,0 +1,40 @@
+@keyframes vertical-fade {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: var(--bgn-color-2);
+  }
+}
+
+.vertical-fade-animation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  animation: vertical-fade 2000ms ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.account-body {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(auto-fit, 2em);
+  overflow-y: auto;
+}
+
+.account-labels {
+  text-align: center;
+  text-transform: lowercase;
+  max-height: 3em;
+  margin-bottom: 0.5em;
+}
+
+.login-button {
+  grid-column: 1 / -1; /* Span from column 1 to the end */
+  background-color: lightblue;
+  max-height: 4em;
+}

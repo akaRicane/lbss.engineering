@@ -5,7 +5,7 @@ import { useCoreContext } from "../contexts/CoreContext";
 import EnvGetter from "../components/EnvGetter";
 import { queryPing } from "../api/aws/engineering-api";
 import * as jose from "jose";
-import "../styles/page.products.css";
+import "../styles/page.account.css";
 
 const Account = () => {
   const { getTokenId } = useCoreContext();
@@ -49,20 +49,24 @@ const Account = () => {
   }, []);
 
   return (
-    <div className="page">
-      <p>username: {userInfos.username}</p>
-      <p>email: {userInfos.email}</p>
-      {isConnected ? (
-        <div>
-          <p>connected: {isConnected.toString()}</p>
-          {/* <p className="break-words text-xs max-w-2xl">Token id: {tokenId ? tokenId : "null"}</p> */}
-        </div>
-      ) : (
-        <div>
-          <p>connected: {isConnected.toString()}</p>
-          <button onClick={handleOnClickLogin}>login</button>
-        </div>
-      )}
+    <div className="vertical-fade-animation">
+      <div className="account-body">
+        <p className="account-labels">username</p>
+        <p className="account-labels">{userInfos.username}</p>
+        <p className="account-labels">email</p>
+        <p className="account-labels">{userInfos.email}</p>
+        <p className="account-labels">connected</p>
+        <p className="account-labels">{isConnected.toString()}</p>
+        {isConnected ? (
+          <div>{/* <p className="break-words text-xs max-w-2xl">Token id: {tokenId ? tokenId : "null"}</p> */}</div>
+        ) : (
+          <div>
+            <button className="login-button" onClick={handleOnClickLogin}>
+              login
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
