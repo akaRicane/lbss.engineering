@@ -94,6 +94,18 @@ export const CoreContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     updateLanguage(currentLanguage);
+    const currentStoredToken = localStorage.getItem("tokenId");
+    if (currentStoredToken) {
+      const tokenObject = jose.decodeJwt(currentStoredToken);
+      const authTime = tokenObject.auth_time || 0;
+      const currentTime = Date.now();
+      const cacheDuration = 1 * 60 * 60 * 1000; // 1 hour in milliseconds
+      // @ts-ignore
+      const delta = currentTime - authTime * 1000; // Convert auth_time to milliseconds
+      if (delta > cacheDuration) {
+        localStorage.removeItem("tokenId");
+      }
+    }
   }, [currentLanguage]);
 
   // Wrap the values in an object
