@@ -97,10 +97,12 @@ export const CoreContextProvider = ({ children }: Props) => {
   };
 
   const updateCurrentMouseOver = (htmlElemName: HoveredHTML): void => {
+    sendToCreative({ target: "mouseOver", message: htmlElemName });
     setCurrentMouseOver(htmlElemName === null ? getText("HEADER_WELCOME", language) : getText(htmlElemName, language));
   };
 
   const resetCurrentMouseOver = (): void => {
+    sendToCreative({ target: "mouseOut", message: "/" });
     setCurrentMouseOver(getText("HEADER_WELCOME", language));
   };
 
