@@ -74,7 +74,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   };
 
   const updateLocation = (newLocation: string): void => {
-    console.log("Setting new location", newLocation);
+    // console.log("Setting new location", newLocation);
     setCurLocation(newLocation);
   };
 
@@ -106,6 +106,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   };
 
   useEffect(() => {
+    // localStorage.setItem("tokenId", "");
     updateLanguage(currentLanguage);
     const currentStoredToken = localStorage.getItem("tokenId");
     if (currentStoredToken) {

@@ -8,7 +8,7 @@ import * as jose from "jose";
 import "../styles/page.account.css";
 
 const Account = () => {
-  const { getTokenId } = useCoreContext();
+  const { getTokenId, updateTokenId } = useCoreContext();
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [userInfos, setUserInfos] = useState({
     email: "not connected",
@@ -20,6 +20,19 @@ const Account = () => {
     if (loginUrl) {
       window.location.assign(loginUrl);
     }
+  };
+
+  const handleOnClickLogout = () => {
+    const logoutUrl = EnvGetter("ENGINE_API_LOGOUT_URL");
+    // @ts-ignore
+    fetch(logoutUrl, {
+      method: "GET",
+      headers: {
+        "lbss-cloud-auth-token": getTokenId(),
+      },
+    });
+    handleOnClickLogin();
+    // window.location.assign(logoutUrl);
   };
 
   useEffect(() => {
@@ -52,18 +65,18 @@ const Account = () => {
     <div className="vertical-fade-animation">
       <div className="account-body">
         <p className="account-labels">username</p>
-        <p className="account-labels">{userInfos.username}</p>
+        <p className="account-info">{userInfos.username}</p>
         <p className="account-labels">email</p>
-        <p className="account-labels">{userInfos.email}</p>
+        <p className="account-info">{userInfos.email}</p>
         <p className="account-labels">connected</p>
-        <p className="account-labels">{isConnected.toString()}</p>
+        <p className="account-info">{isConnected.toString()}</p>
         {isConnected ? (
-          <div>{/* <p className="break-words text-xs max-w-2xl">Token id: {tokenId ? tokenId : "null"}</p> */}</div>
+          <div className="login-button">
+            <button onClick={handleOnClickLogout}>logout</button>
+          </div>
         ) : (
-          <div>
-            <button className="login-button" onClick={handleOnClickLogin}>
-              login
-            </button>
+          <div className="login-button">
+            <button onClick={handleOnClickLogin}>login</button>
           </div>
         )}
       </div>
