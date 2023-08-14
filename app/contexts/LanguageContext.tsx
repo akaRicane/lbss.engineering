@@ -1,7 +1,7 @@
 // context: LanguageContext
 "use client";
 
-import { createContext, useState, useContext, useEffect, ReactNode } from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 
 type languageContextType = {
   currentLanguage: string;

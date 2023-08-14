@@ -5,6 +5,7 @@ import { createContext, useState, useContext, ReactNode } from "react";
 import { useLanguageContext } from "./LanguageContext";
 import TextGetter from "../languages/TextGetter";
 import { useEffect } from "react";
+import * as jose from "jose";
 
 type HoveredHTML = string | null;
 type TokenId = string | null;
@@ -13,6 +14,7 @@ type coreContextType = {
   counter: number;
   updateCounter: () => void;
   tokenId: TokenId;
+  getTokenId: () => TokenId;
   updateTokenId: (newToken: TokenId) => void;
   language: string;
   updateLanguage: (newLanguage: string) => void;
@@ -27,6 +29,9 @@ const coreContextDefaultValues: coreContextType = {
   counter: 0,
   updateCounter: () => {},
   tokenId: null,
+  getTokenId: () => {
+    return null;
+  },
   updateTokenId: (newToken) => {},
   language: "en",
   updateLanguage: (newLanguage) => {},
@@ -60,8 +65,15 @@ export const CoreContextProvider = ({ children }: Props) => {
     setLanguage(newLanguage);
   };
 
+  const getTokenId = (): TokenId => {
+    const localStored = localStorage.getItem("tokenId");
+    return tokenId || localStored;
+  };
+
   const updateTokenId = (newToken: TokenId): void => {
     setTokenId(newToken);
+    // @ts-ignore
+    localStorage.setItem("tokenId", newToken);
   };
 
   const updateCounter = (): void => {
@@ -82,13 +94,14 @@ export const CoreContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     updateLanguage(currentLanguage);
-  }, []);
+  }, [currentLanguage]);
 
   // Wrap the values in an object
   const contextValues = {
     language,
     updateLanguage,
     tokenId,
+    getTokenId,
     updateTokenId,
     counter,
     updateCounter,

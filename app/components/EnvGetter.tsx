@@ -9,7 +9,7 @@ const EnvGetter = (query: string) => {
     answer = process.env.ENGINE_API_URL;
   }
 
-  console.log(`Query ENV ${query} -> ${answer}`);
+  // console.log(`Query ENV ${query} -> ${answer}`);
   return answer;
 };
 
