@@ -1,53 +1,135 @@
 import * as THREE from "../../three/src/Three.js";
-import { OrbitControls } from "../../three/addons/OrbitControls.js";
-// Set up the scene
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-let controls = new OrbitControls(camera, renderer.domElement);
+import { EffectComposer } from "../../three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "../../three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "../../three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
-// Add a cube to the scene
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
 
-camera.position.x = 0;
-camera.position.y = 0;
-camera.position.z = 5;
+/* --------------------------------- EVENTS --------------------------------- */
+// ISHOME = true;
+// HOOVERPRODUCTS = false;
+// HOOVERABOUT = false;
+// HOOVERACCOUNT = false;
+// ISPRODUCTS = false;
+// ISABOUT = false;
+// ISACCOUNT = false;
+// CLICK = { isClick : false, x : 0, y : 0};
+// WHEEL = { isWheel : false, deltaX : 0, deltaY : 0};
+// CURSOR = {x : 0, y : 0};
+/* ------------------------------------ x ----------------------------------- */
+
+let scene, camera, renderer;
+let cube;
+let animations = [];
+let composer;
+
+function init() {
+  setupScene();
+  createPostProcessing();
+  createCameraAnimation();
+}
 
 // Render the scene
 function animate() {
   requestAnimationFrame(animate);
-  controls.update();
 
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.02;
-  switch (EVENT.message) {
-    case "LINK_TO_PRODUCTS":
-      cube.material.color = new THREE.Color("#FF00FF".slice(0, 7));
-      cube.material.wireframe = true;
-
-      break;
-    case "LINK_TO_ABOUT":
-      cube.material.wireframe = false;
-      cube.material.color = new THREE.Color("#0F0FFF".slice(0, 7));
-
-      break;
-    case "LINK_TO_ACCOUNT":
-      cube.material.wireframe = true;
-      cube.material.color = new THREE.Color("#4FFDFF".slice(0, 7));
-
-      break;
-
-    default:
-      cube.material.wireframe = false;
-      cube.material.color = new THREE.Color("#5E00FF".slice(0, 7));
-      break;
+  //   cube.rotation.x += 0.01;
+  //   cube.rotation.y += 0.02;
+  cube.material.color = new THREE.Color(240, 200, 0);
+  cube.material.wireframe = true;
+  if (HOOVERPRODUCTS) {
+    triggerAnimation(0);
+    HOOVERPRODUCTS = false;
+  } else if (HOOVERABOUT) {
+    triggerAnimation(1);
+    HOOVERABOUT = false;
+  } else if (HOOVERACCOUNT) {
+    triggerAnimation(2);
+    HOOVERACCOUNT = false;
+  } else{
+    // triggerAnimation(4);
   }
-  renderer.render(scene, camera);
+
+  if(ISPRODUCTS){
+    cube.material.color = new THREE.Color(0, 200, 0);
+  }
+
+  TWEEN.update();
+//   renderer.render(scene, camera);
+  renderer.clear();
+  composer.render();
+}
+init();
+animate();
+
+function setupScene() {
+  // Set up the scene
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // Add a cube to the scene
+  const geometry = new THREE.DodecahedronGeometry(2);
+  const material = new THREE.MeshBasicMaterial({ color: new THREE.Color(240, 200, 0) });
+  cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  camera.position.x = 0;
+  camera.position.y = 0;
+  camera.position.z = 5;
 }
 
-animate();
+function createPostProcessing() {
+    composer = new EffectComposer(renderer);
+    const bypass = new RenderPass(scene, camera);
+    const unreal = new UnrealBloomPass();
+    unreal.threshold = 0;
+    unreal.strength = 2;
+    unreal.radius = 1;
+    composer.addPass(bypass);
+    composer.addPass(unreal);
+    bypass.enabled = true;
+    unreal.enabled = true;
+}
+
+function createCameraAnimation() {
+  const anim_duration = 2000;
+  const cameraTween = new TWEEN.Tween(camera.position)
+    .to({ x: -5, y: 0, z: 0 }, anim_duration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(() => {
+      camera.lookAt(0, 0, 0);
+    });
+  animations.push(cameraTween);
+  const cameraTween2 = new TWEEN.Tween(camera.position)
+    .to({ x: 0, y: -5, z: -5 }, anim_duration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(() => {
+      camera.lookAt(0, 0, 0);
+    });
+  animations.push(cameraTween2);
+  const cameraTween3 = new TWEEN.Tween(camera.position)
+    .to({ x: 0, y : 0, z: 0}, anim_duration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(() => {
+    //   camera.lookAt(0, 0, 0);
+    });
+  animations.push(cameraTween3);
+  const cameraTween4 = new TWEEN.Tween(camera.position)
+    .to({ x: 0, y: -0.1, z: 0.1 }, anim_duration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(() => {
+      camera.lookAt(0, 0, 0);
+    });
+  animations.push(cameraTween4);
+}
+
+function triggerAnimation(animIdx) {
+  animations.forEach((anim) => {
+    anim.stop();
+  });
+  animations[Math.min(animIdx, animations.length - 1)].startFromCurrentValues();
+}
+
+//   tween1.chain(tween2);
