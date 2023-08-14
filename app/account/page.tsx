@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 import EnvGetter from "../components/EnvGetter";
+import { queryPing } from "../api/aws/engineering-api";
 import * as jose from "jose";
 import "../styles/page.products.css";
 
@@ -23,7 +24,6 @@ const Account = () => {
 
   useEffect(() => {
     const tokenId = getTokenId();
-    const apiUrl = EnvGetter("ENGINE_API_URL");
 
     if (tokenId) {
       // @ts-ignore
@@ -37,23 +37,9 @@ const Account = () => {
         };
         // @ts-ignore
         setUserInfos(extractedInfos);
-        // console.log(`Fetching ${apiUrl}/ping`);
-        fetch(`${apiUrl}/ping`, {
-          method: "GET",
-          headers: {
-            "lbss-cloud-auth-token": tokenId,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            const body = JSON.parse(data.body);
-            // console.log("Connection", body);
-            if (body !== "success") {
-              setIsConnected(false);
-            } else {
-              setIsConnected(true);
-            }
-          });
+        queryPing(tokenId).then((response) => {
+          setIsConnected(response);
+        });
       } else {
         setIsConnected(false);
       }

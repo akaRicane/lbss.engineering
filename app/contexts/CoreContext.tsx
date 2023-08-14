@@ -8,7 +8,9 @@ import { useEffect } from "react";
 import * as jose from "jose";
 
 type HoveredHTML = string | null;
+
 type TokenId = string | null;
+
 type coreContextType = {
   version: string;
   counter: number;
