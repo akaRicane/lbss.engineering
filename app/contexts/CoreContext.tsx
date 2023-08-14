@@ -64,7 +64,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   const { currentLanguage } = useLanguageContext();
   const [language, setLanguage] = useState<string>("en");
   const [tokenId, setTokenId] = useState<TokenId>(null);
-  const [curLocation, setCurLocation] = useState<string>("/");
+  const [curLocation, setCurLocation] = useState<string>(window.location.pathname);
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
   const version: string = EnvGetter("APP_VERSION") || "cannot fetch version";
