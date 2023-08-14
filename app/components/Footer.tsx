@@ -4,9 +4,16 @@
 import { useCoreContext } from "../contexts/CoreContext";
 import HoveredLink from "./HoveredLink";
 import "../styles/components.header.footer.css";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
-  const { getText, version, language, updateLanguage } = useCoreContext();
+  const { getText, version, language, updateLanguage, curLocation } = useCoreContext();
+  const [pathname, setPathname] = useState(curLocation);
+
+  useEffect(() => {
+    console.log(curLocation);
+    setPathname(curLocation);
+  }, [curLocation]);
 
   return (
     <main className="footer">
@@ -18,7 +25,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="centered-element">
-        <HoveredLink linkID="LINK_TO_HOME" linkTarget="/" language={language}></HoveredLink>
+        {pathname !== "/" ? <HoveredLink linkID="LINK_TO_HOME" linkTarget="/" language={language}></HoveredLink> : <p> </p>}
       </div>
       <div className="centered-element">
         <small>{version}</small>

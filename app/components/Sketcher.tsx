@@ -10,6 +10,7 @@ const Sketcher = ({ sketch }: { sketch: string }) => {
   const [curSketch, setCurSketch] = useState("threedems");
 
   useEffect(() => {
+    // @ts-ignore
     switch (getKeyFromMessage(currentMouseOver, language)) {
       case "LINK_TO_PRODUCTS":
         setCurSketch("poc");
