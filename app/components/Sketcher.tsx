@@ -24,7 +24,7 @@ const Sketcher = ({ sketch }: { sketch: string }) => {
 
   return (
     <div className="-z-10 w-full h-full fixed top-0 left-0 right-0">
-      <iframe src={`./creative/threedems/index.html`} className="w-full h-full"></iframe>
+      <iframe id="CREATIVE_FRAME" src={`./creative/threedems/index.html`} className="w-full h-full"></iframe>
     </div>
   );
 };

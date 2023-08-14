@@ -7,6 +7,7 @@ import { useLanguageContext } from "./LanguageContext";
 import { TextGetter } from "../languages/TextGetter";
 import EnvGetter from "../components/EnvGetter";
 import { getLocation } from "../api/utils/utils";
+import { sendToCreative } from "../api/utils/creativeApi";
 import * as jose from "jose";
 
 type HoveredHTML = string | null;
@@ -76,6 +77,7 @@ export const CoreContextProvider = ({ children }: Props) => {
 
   const updateLocation = (newLocation: string): void => {
     // console.log("Setting new location", newLocation);
+    sendToCreative({ target: "location", message: newLocation });
     setCurLocation(newLocation);
   };
 
