@@ -25,12 +25,12 @@ const Account = () => {
   const handleOnClickLogout = () => {
     const logoutUrl = EnvGetter("ENGINE_API_LOGOUT_URL");
     // @ts-ignore
-    fetch(logoutUrl, {
-      method: "GET",
-      headers: {
-        "lbss-cloud-auth-token": getTokenId(),
-      },
-    });
+    // fetch(logoutUrl, {
+    //   method: "GET",
+    //   headers: {
+    //     "lbss-cloud-auth-token": getTokenId(),
+    //   },
+    // });
     handleOnClickLogin();
     // window.location.assign(logoutUrl);
   };
