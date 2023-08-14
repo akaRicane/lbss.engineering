@@ -9,6 +9,10 @@ const TEXT_BOOK: TextBookType = {
     en: "Welcome to lbss.engineering!",
     fr: "Bienvenue sur lbss.engineering!",
   },
+  LANGUAGE: {
+    en: "english",
+    fr: "français",
+  },
   LINK_TO_HOME: {
     en: "To home",
     fr: "Retour à l'acceuil",

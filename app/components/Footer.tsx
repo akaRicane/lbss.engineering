@@ -1,27 +1,41 @@
 // component: Footer
 "use client";
 
+import { useEffect, useState } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 import HoveredLink from "./HoveredLink";
+import { TextGetter } from "../languages/TextGetter";
 import "../styles/components.header.footer.css";
-import { useEffect, useState } from "react";
 
 const Footer = () => {
   const { getText, version, language, updateLanguage, curLocation } = useCoreContext();
   const [pathname, setPathname] = useState(curLocation);
+  const [showLanguagesOptions, setShowLanguagesOptions] = useState<boolean>(false);
+
+  const handleOnMouseOverLanguage = () => {
+    setShowLanguagesOptions(true);
+  };
+
+  const handleOnMouseOutLanguage = () => {
+    setShowLanguagesOptions(false);
+  };
 
   useEffect(() => {
-    console.log(curLocation);
     setPathname(curLocation);
   }, [curLocation]);
 
   return (
     <main className="footer">
       <div className="centered-element">
-        <div>
-          <small>Language {language} </small>
-          <button onClick={() => updateLanguage("en")}>🇺🇸</button>
-          <button onClick={() => updateLanguage("fr")}>🇫🇷</button>
+        <div onMouseOver={handleOnMouseOverLanguage} onMouseOut={handleOnMouseOutLanguage}>
+          {showLanguagesOptions ? (
+            <div>
+              <button onClick={() => updateLanguage("en")}>🇺🇸</button>
+              <button onClick={() => updateLanguage("fr")}>🇫🇷</button>
+            </div>
+          ) : (
+            <button>{TextGetter("LANGUAGE", language)}</button>
+          )}
         </div>
       </div>
       <div className="centered-element">
@@ -29,7 +43,6 @@ const Footer = () => {
       </div>
       <div className="centered-element">
         <small>{version}</small>
-        {/* <HoveredLink linkID="LINK_TO_BETATEST" linkTarget="/betatest" language={language}></HoveredLink> */}
       </div>
     </main>
   );
