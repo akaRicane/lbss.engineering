@@ -15,6 +15,25 @@ const Sketcher = ({ sketch }: { sketch: string }) => {
         },
       });
     });
+    window.addEventListener("click", (event) => {
+      sendToCreative({
+        target: "click",
+        message: {
+          x: event.clientX,
+          y: event.clientY,
+        },
+      });
+    });
+    window.addEventListener("wheel", (event) => {
+      // console.log(event);
+      sendToCreative({
+        target: "wheel",
+        message: {
+          deltaX: event.deltaX,
+          deltaY: event.deltaY,
+        },
+      });
+    });
   }, []);
 
   return (
