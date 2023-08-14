@@ -16,7 +16,6 @@ export default function Home() {
         <HoveredLink linkID="LINK_TO_PRODUCTS" linkTarget="/products" language={language}></HoveredLink>
         <HoveredLink linkID="LINK_TO_ABOUT" linkTarget="/about" language={language}></HoveredLink>
         <HoveredLink linkID="LINK_TO_ACCOUNT" linkTarget="/account" language={language}></HoveredLink>
-        <Sketcher sketch="threedems"></Sketcher>
       </div>
     </main>
   );
