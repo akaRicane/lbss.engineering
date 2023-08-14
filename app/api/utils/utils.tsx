@@ -1,3 +1,5 @@
+"use client";
+
 export function getLocation() {
-  return window.location.pathname;
+  return typeof window !== "undefined" ? window.location.pathname : "/";
 }

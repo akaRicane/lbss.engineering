@@ -2,6 +2,7 @@
 "use client";
 
 import { createContext, useState, useContext, useEffect, ReactNode } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { useLanguageContext } from "./LanguageContext";
 import { TextGetter } from "../languages/TextGetter";
 import EnvGetter from "../components/EnvGetter";
@@ -64,7 +65,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   const { currentLanguage } = useLanguageContext();
   const [language, setLanguage] = useState<string>("en");
   const [tokenId, setTokenId] = useState<TokenId>(null);
-  const [curLocation, setCurLocation] = useState<string>(window.location.pathname || "/");
+  const [curLocation, setCurLocation] = useState<string>(usePathname());
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
   const version: string = EnvGetter("APP_VERSION") || "cannot fetch version";
