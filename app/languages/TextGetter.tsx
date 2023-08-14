@@ -9,6 +9,10 @@ const TEXT_BOOK: TextBookType = {
     en: "Welcome to lbss.engineering!",
     fr: "Bienvenue sur lbss.engineering!",
   },
+  LANGUAGE: {
+    en: "english",
+    fr: "français",
+  },
   LINK_TO_HOME: {
     en: "To home",
     fr: "Retour à l'acceuil",
@@ -24,6 +28,14 @@ const TEXT_BOOK: TextBookType = {
   "#PRODUCTS_PRESENTATION": {
     en: "Our products",
     fr: "Nos solutions",
+  },
+  "#PRODUCTS_PRESENTATION_ASTAR": {
+    en: "hello i am a good software to do some creative coding and live performances !! Buy me please !",
+    fr: "je suis Astar, le gentil logiciel trop cool",
+  },
+  "#PRODUCTS_PRESENTATION_LBSSCLOUD": {
+    en: "work in progress ...",
+    fr: "encore en cours de développement!",
   },
   LINK_TO_ASTAR: {
     en: "To ASTAR",
@@ -51,7 +63,7 @@ const TEXT_BOOK: TextBookType = {
   },
 };
 
-export default function TextGetter(props: string, language: string = "en"): string {
+export function TextGetter(props: string, language: string = "en"): string {
   var fetched = "fail";
   if (TEXT_BOOK[props]) {
     if (TEXT_BOOK[props][language]) {
@@ -65,4 +77,13 @@ export default function TextGetter(props: string, language: string = "en"): stri
   }
 
   return fetched;
+}
+
+export function getKeyFromMessage(message: string, language: string = "en"): string | undefined {
+  for (const key in TEXT_BOOK) {
+    if (TEXT_BOOK[key][language] === message) {
+      return key;
+    }
+  }
+  return undefined; // Return undefined if no key matches the provided message
 }

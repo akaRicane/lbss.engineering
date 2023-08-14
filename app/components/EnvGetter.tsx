@@ -1,4 +1,4 @@
-const EnvGetter = (query: string) => {
+const EnvGetter = (query: string): string | undefined => {
   var answer: string | undefined = "null";
 
   if (query === "ENGINE_API_LOGIN_URL" && process.env.NODE_ENV === "development") {
@@ -7,6 +7,8 @@ const EnvGetter = (query: string) => {
     answer = process.env.ENGINE_API_LOGIN_URL_PROD;
   } else if (query === "ENGINE_API_URL") {
     answer = process.env.ENGINE_API_URL;
+  } else if (query === "APP_VERSION") {
+    answer = process.env.APP_VERSION;
   }
 
   // console.log(`Query ENV ${query} -> ${answer}`);

@@ -1,10 +1,11 @@
 // context: CoreContext
 "use client";
 
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useState, useContext, useEffect, ReactNode } from "react";
 import { useLanguageContext } from "./LanguageContext";
-import TextGetter from "../languages/TextGetter";
-import { useEffect } from "react";
+import { TextGetter } from "../languages/TextGetter";
+import EnvGetter from "../components/EnvGetter";
+import { getLocation } from "../api/utils/utils";
 import * as jose from "jose";
 
 type HoveredHTML = string | null;
@@ -13,6 +14,8 @@ type TokenId = string | null;
 
 type coreContextType = {
   version: string;
+  curLocation: string;
+  updateLocation: (newLocation: string) => void;
   counter: number;
   updateCounter: () => void;
   tokenId: TokenId;
@@ -28,6 +31,8 @@ type coreContextType = {
 
 const coreContextDefaultValues: coreContextType = {
   version: "0.0.1",
+  curLocation: "/",
+  updateLocation: (newLocation) => {},
   counter: 0,
   updateCounter: () => {},
   tokenId: null,
@@ -59,12 +64,18 @@ export const CoreContextProvider = ({ children }: Props) => {
   const { currentLanguage } = useLanguageContext();
   const [language, setLanguage] = useState<string>("en");
   const [tokenId, setTokenId] = useState<TokenId>(null);
+  const [curLocation, setCurLocation] = useState<string>("/");
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
-  const version: string = "0.2.3";
+  const version: string = EnvGetter("APP_VERSION") || "cannot fetch version";
 
   const updateLanguage = (newLanguage: string): void => {
     setLanguage(newLanguage);
+  };
+
+  const updateLocation = (newLocation: string): void => {
+    console.log("Setting new location", newLocation);
+    setCurLocation(newLocation);
   };
 
   const getTokenId = (): TokenId => {
@@ -114,6 +125,8 @@ export const CoreContextProvider = ({ children }: Props) => {
   const contextValues = {
     language,
     updateLanguage,
+    curLocation,
+    updateLocation,
     tokenId,
     getTokenId,
     updateTokenId,
