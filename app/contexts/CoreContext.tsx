@@ -59,7 +59,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   const [tokenId, setTokenId] = useState<TokenId>(null);
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
-  const version: string = "0.2.2";
+  const version: string = "0.2.3";
 
   const updateLanguage = (newLanguage: string): void => {
     setLanguage(newLanguage);
