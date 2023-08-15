@@ -1,0 +1,45 @@
+.astar-page {
+  font-size: small;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.astar-navigation {
+  height: 10%;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.astar-navigation-btn {
+  text-transform: uppercase;
+  font-size: medium;
+  padding: 1%;
+  max-height: 80%;
+}
+
+.astar-navigation-btn:hover {
+  border: 1px solid yellow;
+  background-color: blue;
+}
+
+@media (max-width: 600px) {
+  .astar-navigation {
+    font-size: small;
+    flex-direction: column;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    height: 10em;
+  }
+}

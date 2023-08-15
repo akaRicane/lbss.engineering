@@ -18,7 +18,7 @@ const Products = () => {
           title="ASTAR"
           bodyContent={TextGetter("#PRODUCTS_PRESENTATION_ASTAR", language)}
           linkID="LINK_TO_ASTAR"
-          linkTarget="/"
+          linkTarget="/astar"
           mainColor="red"
           secondColor="green"
           language={language}
