@@ -3,8 +3,7 @@ import { EffectComposer } from "../../three/examples/jsm/postprocessing/EffectCo
 import { RenderPass } from "../../three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "../../three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { RenderPixelatedPass } from "../../three/examples/jsm/postprocessing/RenderPixelatedPass.js";
-import vertexShader from "./vertex.js";
-import fragmentShader from "./fragment.js";
+
 /* --------------------------------- EVENTS --------------------------------- */
 // ISHOME = true;
 // HOOVERPRODUCTS = false;
@@ -24,62 +23,46 @@ let composer;
 let cameraAnimations = [];
 let animations = [];
 let lights = [];
-let postproc = [];
-
+let sphere_radius;
 
 function init() {
   setupScene();
   createLights();
-  // createBoxBackground();
+    // createBoxBackground();
   createObject();
   createPostProcessing();
-  createAnimations();
+  createAnimations(); 
   createCameraAnimation();
 }
 
 // Render the scene
 function animate() {
   requestAnimationFrame(animate);
-  cube.rotation.x += 0.001;
-  cube.rotation.y += 0.001;
+    cube.rotation.x += 0.001;
+    cube.rotation.y += 0.001;
   cube.material.color = new THREE.Color(255, 255, 255);
   cube.material.wireframe = false;
-
-  if (HOOVERPRODUCTS.hovered) {
-    console.log("products");
+  if (HOOVERPRODUCTS) {
     triggerCameraAnimation(0);
-    triggerAnimation(0);
-    HOOVERPRODUCTS.hovered = false;
-  } else if (HOOVERABOUT.hovered) {
-    console.log("about");
+    HOOVERPRODUCTS = false;
+  } else if (HOOVERABOUT) {
     triggerCameraAnimation(1);
-    triggerAnimation(1);
-    HOOVERABOUT.hovered = false;
-  } else if (HOOVERACCOUNT.hovered) {
-    console.log("account");
+    HOOVERABOUT = false;
+  } else if (HOOVERACCOUNT) {
     triggerCameraAnimation(2);
-    triggerAnimation(2);
-    HOOVERACCOUNT.hovered = false;
+    HOOVERACCOUNT = false;
   } else {
-    updateUniforms();
+    // triggerCameraAnimation(4);
   }
 
-  if (HOOVERPRODUCTS.isHoovering == true && CLICK.isClick == true) {
-    triggerCameraAnimation(3);
-    // triggerAnimation(4);
-} else if (HOOVERHOME.isHoovering == true  && CLICK.isClick == true) {
-    triggerCameraAnimation(0);
+  if (ISPRODUCTS) {
     triggerAnimation(0);
+}else{
+    triggerAnimation(1);
   }
 
   TWEEN.update();
-  //   updateUniforms();
-  cube.geometry.needsUpdate = true;
-
-  CLICK.isClick = false;
-
-  updatePostProcessing();
-
+  updateVerticesWithTime(cube, Date.now() / 10);
   // Without Post Proc
   //   renderer.render(scene, camera);
 
@@ -109,42 +92,76 @@ function setupScene() {
 }
 
 function createObject() {
-  const cubeSize = 5;
-  const vertices_precision = 100;
-  const points = [];
-  for (let i = 0; i < vertices_precision; i++) {
-    points.push(new THREE.Vector2(Math.sin(i * 0.2) * cubeSize + 10, Math.tan(i - cubeSize / 2) * 0.001));
-  }
-  const geometry = new THREE.LatheGeometry(points);
-  cube = new THREE.Mesh(
-    // geometry,
-    // new THREE.DodecahedronGeometry(cubeSize,vertices_precision),
-    // new THREE.SphereGeometry(cubeSize,vertices_precision,vertices_precision),
-    new THREE.BoxGeometry(cubeSize, cubeSize*2, cubeSize, vertices_precision, vertices_precision, vertices_precision),
-    new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      uniforms: {
-        uTime: { value: 0 },
-        offsetFace: { value: 1.0 },
-        deformFactor: { value: 1.0 },
-      },
-    })
-  );
-  cube.geometry.needsUpdate = true;
+  // Add a cube to the scene
+  sphere_radius = 5;
+//   const geometry = new THREE.SphereGeometry(sphere_radius);
+  const geometry = new THREE.SphereGeometry(sphere_radius, 100, 100);
+  //   const material = new THREE.MeshStandardMaterial({ color: new THREE.Color(240, 200, 0), emissive: new THREE.Color(0, 0, 0) });
+  const material = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color(255, 0, 255),
+    // emissive: new THREE.Color(0, 0, 0),
+    side: THREE.DoubleSide,
+    roughness: 0,
+    metalness: 0.9,
+    shininess: 0,
+    clearcoat : 1
+  });
+  cube = new THREE.Mesh(geometry, material);
+  cube.castShadow = true;
+  cube.receiveShadow = true;
   scene.add(cube);
-}
+  // Access vertices and normals
+  const vertices = geometry.attributes.position.array;
+  const normals = geometry.attributes.normal.array;
 
-// Update the uTime uniform in the render loop or any desired update function
-function updateUniforms() {
-  cube.material.uniforms.uTime.value = performance.now() * 0.001; // Set the uTime uniform to the current time
-  //   cube.material.uniforms.offsetFace.value = 1 + Math.sin(performance.now() * 0.001);
-  cube.material.uniforms.offsetFace.value *= 1 + 0.001 * Math.sin(performance.now() * 0.001);
-  cube.material.uniforms.deformFactor.value *= 1 + 0.001 * Math.sin(performance.now() * 0.001);
-  // cube.material.uniforms.offsetFace.value = Math.sin(performance.now() * 0.001)+1.0;
-  //   cube.material.uniforms.deformFactor.value = Math.sin(performance.now() * 0.001) + 1.0;
+  // Convert vertices to spherical coordinates
+  for (let i = 0; i < vertices.length; i += 3) {
+    const x = vertices[i];
+    const y = vertices[i + 1];
+    const z = vertices[i + 2];
+
+    const radius = Math.sqrt(x * x + y * y + z * z);
+    const theta = Math.acos(y / radius); // Polar angle
+    const phi = Math.atan2(z, x); // Azimuthal angle
+
+    // Modify point position along the sphere radius
+    const modifiedRadius = sphere_radius; // Adjust as needed
+
+    // Convert back to Cartesian coordinates
+    vertices[i] = modifiedRadius * Math.sin(theta) * Math.cos(phi);
+    vertices[i + 1] = modifiedRadius * Math.cos(theta);
+    vertices[i + 2] = modifiedRadius * Math.sin(theta) * Math.sin(phi);
+  }
+
+  // Update the geometry with modified vertices
+  geometry.attributes.position.needsUpdate = true;
+  
+}
+function updateVerticesWithTime(mesh, time) {
+  const geometry = mesh.geometry;
+  const vertices = geometry.attributes.position.array;
+
+  for (let i = 0; i < vertices.length; i += 3) {
+    const x = vertices[i];
+    const y = vertices[i + 1];
+    const z = vertices[i + 2];
+
+    const radius = Math.sqrt(x * x + y * y + z * z);
+    const theta = Math.acos(y / radius);
+    const phi = Math.atan2(z, x);
+
+    // Modify point position along the sphere radius using time
+    // const modifiedRadius = sphere_radius + (Math.sin(phi + time / 1000) + Math.cos(theta*4 + time/1000) * sphere_radius*0.2); // Adjust as needed
+    const modifiedRadius = sphere_radius + (Math.sin(theta*phi * (2 + WHEEL.wheelPositionY*0.0001) + time / 600) * sphere_radius*0.2) + + (Math.sin(theta * (8 + WHEEL.wheelPositionY*0.01) + time / 400) * sphere_radius*0.1) + (Math.cos(phi * (8 + WHEEL.wheelPositionX*0.01) + time / 500) * sphere_radius*0.05); // Adjust as needed
+
+    // Convert back to Cartesian coordinates
+    vertices[i] = modifiedRadius * Math.sin(theta) * Math.cos(phi);
+    vertices[i + 1] = modifiedRadius * Math.cos(theta);
+    vertices[i + 2] = modifiedRadius * Math.sin(theta) * Math.sin(phi);
+  }
+
+  // Update the geometry with modified vertices
+  geometry.attributes.position.needsUpdate = true;
 }
 
 function createBoxBackground() {
@@ -167,9 +184,7 @@ function createPostProcessing() {
   composer = new EffectComposer(renderer);
   const bypass = new RenderPass(scene, camera);
   const unreal = new UnrealBloomPass();
-  postproc.push(unreal);
-  const renderPixelated = new RenderPixelatedPass(10, scene, camera);
-  postproc.push(renderPixelated);
+  const renderPixelated = new RenderPixelatedPass( 10, scene, camera);
   unreal.threshold = 0.15;
   unreal.strength = 0.3;
   unreal.radius = 10;
@@ -181,59 +196,51 @@ function createPostProcessing() {
   renderPixelated.enabled = false;
 }
 
-function updatePostProcessing() {
-}
 
 function createAnimations() {
-  const anim_duration = 4000;
-  const animTween = new TWEEN.Tween(cube.material.uniforms)
-    .to({ offsetFace: { value: 1 }, deformFactor: { value: 1 } }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut);
-  animations.push(animTween);
-  const animTween2 = new TWEEN.Tween(cube.material.uniforms)
-    .to({ offsetFace: { value: 0 }, deformFactor: { value: 0 } }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut);
-  animations.push(animTween2);
-  const animTween3 = new TWEEN.Tween(cube.material.uniforms)
-    .to({ offsetFace: { value: 2 }, deformFactor: { value: 1 } }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut);
-  animations.push(animTween3);
-  const animTween4 = new TWEEN.Tween(cube.material.uniforms)
-    .to({ offsetFace: { value: 2 }, deformFactor: { value: 5 } }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut);
-  animations.push(animTween4);
-  const animTween5 = new TWEEN.Tween(cube.position)
-    .to({ x : -10, y : 5 }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut);
-  animations.push(animTween5);
+    const anim_duration = 2000;
+    const animTween = new TWEEN.Tween(cube.material)
+      .to({metalness : 0.99}, anim_duration)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onUpdate(()=>{
+        cube.material.needsUpdate = true;
+      })
+      animations.push(animTween);
+      const animTween2 = new TWEEN.Tween(cube.material)
+      .to({metalness : 0}, anim_duration)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onUpdate(()=>{
+        cube.material.needsUpdate = true;
+      })
+      animations.push(animTween2);
 }
 
 function createCameraAnimation() {
-  const anim_duration = 3000;
+  const anim_duration = 2000;
   const cameraTween = new TWEEN.Tween(camera.position)
-    .to({ x: 10, y: -3, z: 0 }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut)
+    .to({ x: 10, y: 0, z: 0 }, anim_duration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
     .onUpdate(() => {
       camera.lookAt(0, 0, 0);
     });
   cameraAnimations.push(cameraTween);
   const cameraTween2 = new TWEEN.Tween(camera.position)
     .to({ x: 0, y: -10, z: -10 }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut)
+    .easing(TWEEN.Easing.Quadratic.InOut)
     .onUpdate(() => {
       camera.lookAt(0, 0, 0);
     });
   cameraAnimations.push(cameraTween2);
   const cameraTween3 = new TWEEN.Tween(camera.position)
-    .to({ x: 0, y: 0, z: -1 }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut)
+    .to({ x: 0, y: 0, z: -sphere_radius/2 }, anim_duration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
     .onUpdate(() => {
-      camera.lookAt(0, 0, 0);
+      //   camera.lookAt(0, 0, 0);
     });
   cameraAnimations.push(cameraTween3);
   const cameraTween4 = new TWEEN.Tween(camera.position)
-    .to({ x: 7, y: -5, z: 10 }, anim_duration)
-    .easing(TWEEN.Easing.Cubic.InOut)
+    .to({ x: 0, y: -0.1, z: 0.1 }, anim_duration)
+    .easing(TWEEN.Easing.Quadratic.InOut)
     .onUpdate(() => {
       camera.lookAt(0, 0, 0);
     });
@@ -257,9 +264,9 @@ function createLights() {
   const ambient = new THREE.AmbientLight(new THREE.Color(1, 0, 1), 0.005);
   scene.add(ambient);
   const colors = [new THREE.Color("#6000FF"), new THREE.Color("#B800E3"), new THREE.Color("#94003F")];
-  //   const light1 = createPointLight(colors[0], 0, 0, 0, true, 0.2);
-  //   light1.lookAt(0, 0, 0);
-  //   lights.push(light1);
+//   const light1 = createPointLight(colors[0], 0, 0, 0, true, 0.2);
+//   light1.lookAt(0, 0, 0);
+//   lights.push(light1);
   const light1 = createDirectionalLight(colors[0], -5, 0, 30, true, 0.1);
   light1.lookAt(0, 0, 0);
   lights.push(light1);
@@ -269,9 +276,9 @@ function createLights() {
   const light3 = createDirectionalLight(colors[2], 0, -30, 0, true, 0.1);
   light3.lookAt(0, 0, 0);
   lights.push(light3);
-  //   const light4 = createDirectionalLight(colors[1], -30, 30, 30, true, 0.4);
-  //   light4.lookAt(0, 2, 0);
-  //   lights.push(light4);
+//   const light4 = createDirectionalLight(colors[1], -30, 30, 30, true, 0.4);
+//   light4.lookAt(0, 2, 0);
+//   lights.push(light4);
 }
 
 function createDirectionalLight(color = new THREE.Color("#FFFFFF"), x = 0, y = 0, z = 0, shadows = true, intensity = 1) {
@@ -282,10 +289,10 @@ function createDirectionalLight(color = new THREE.Color("#FFFFFF"), x = 0, y = 0
   light.shadow.camera.bottom = -500;
   light.shadow.camera.left = -500;
   light.shadow.camera.right = 500;
-  //   light.shadow.bias = 0.01;
-  //   light.shadow.radius = 0.1;
-  //   light.shadow.mapSize.width = 2048;
-  //   light.shadow.mapSize.height = 2048;
+//   light.shadow.bias = 0.01;
+//   light.shadow.radius = 0.1;
+//   light.shadow.mapSize.width = 2048;
+//   light.shadow.mapSize.height = 2048;
   scene.add(light);
   return light;
 }

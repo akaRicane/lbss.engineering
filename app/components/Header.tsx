@@ -7,9 +7,14 @@ import "../styles/components.header.footer.css";
 const Header = () => {
   const { getText, currentMouseOver, language } = useCoreContext();
 
+  const activeHeaderText = currentMouseOver ? (currentMouseOver ): (getText("HEADER_WELCOME", language));
+  const headerStyle = {
+    backgroundColor: activeHeaderText == getText("HEADER_WELCOME", language) ? 'var(--bgn-color-2)' : 'var(--bgn-color-3)', 
+  };
+  
   return (
-    <main className="header">
-      <p className="rolling-text">{currentMouseOver ? currentMouseOver : getText("HEADER_WELCOME", language)}</p>
+    <main className="header" style={headerStyle}>
+      <p className="rolling-text">{activeHeaderText} </p>
     </main>
   );
 };

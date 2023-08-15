@@ -5,6 +5,6 @@
 
 .hovered-button:hover,
 .hovered-link:hover {
-  color: var(--bgn-color-2);
+  color: var(--bgn-color-3);
   /* background-color: var(--bgn-hover-link); */
 }
