@@ -11,7 +11,7 @@ const nextConfig = {
   publicRuntimeConfig: {
     // Add your configuration options here
     staticFolder: '/static', // This assumes your HTML files are served from the "/static" folder
-  },
+  }
 }
 
 module.exports = nextConfig
