@@ -4,7 +4,6 @@
 import { useCoreContext } from "../contexts/CoreContext";
 import HoveredButton from "../components/HoveredButton";
 import ProductCard from "../components/ProductCard";
-import { TextGetter } from "../languages/TextGetter";
 import "../styles/page.products.css";
 
 const Products = () => {
@@ -16,7 +15,7 @@ const Products = () => {
       <div className="products-list">
         <ProductCard
           title="ASTAR"
-          bodyContent={TextGetter("#PRODUCTS_PRESENTATION_ASTAR", language)}
+          bodyContent={getText("#PRODUCTS_PRESENTATION_ASTAR", language)}
           linkID="LINK_TO_ASTAR"
           linkTarget="/astar"
           mainColor="red"
@@ -25,7 +24,7 @@ const Products = () => {
         ></ProductCard>
         <ProductCard
           title="LBSS Cloud"
-          bodyContent={TextGetter("#PRODUCTS_PRESENTATION_LBSSCLOUD", language)}
+          bodyContent={getText("#PRODUCTS_PRESENTATION_LBSSCLOUD", language)}
           linkID="LINK_TO_LBSSCLOUD"
           linkTarget="/betatest"
           mainColor="blue"

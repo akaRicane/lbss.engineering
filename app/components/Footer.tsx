@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 import HoveredLink from "./HoveredLink";
-import { TextGetter } from "../languages/TextGetter";
 import "../styles/components.header.footer.css";
 
 const Footer = () => {
@@ -34,7 +33,7 @@ const Footer = () => {
               <button onClick={() => updateLanguage("fr")}>🇫🇷</button>
             </div>
           ) : (
-            <button>{TextGetter("LANGUAGE", language)}</button>
+            <button>{getText("LANGUAGE", language)}</button>
           )}
         </div>
       </div>

@@ -3,7 +3,7 @@
 import "../../styles/page.astar.css";
 
 const Download = () => {
-  return <div>Download</div>;
+  return <div>Astar is not available to download for now.</div>;
 };
 
 export default Download;

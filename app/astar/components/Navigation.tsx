@@ -17,7 +17,7 @@ const Navigation: React.FC<NavigationProps> = ({ callback }) => {
         <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "overview" })}>
           overview
         </button>
-        <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "features" })}>
+        {/* <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "features" })}>
           features
         </button>
         <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "usages" })}>
@@ -25,13 +25,13 @@ const Navigation: React.FC<NavigationProps> = ({ callback }) => {
         </button>
         <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "specifications" })}>
           specifications
-        </button>
+        </button> */}
         <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "download" })}>
           download
         </button>
-        <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "more" })}>
+        {/* <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "more" })}>
           more
-        </button>
+        </button> */}
       </div>
     </>
   );
