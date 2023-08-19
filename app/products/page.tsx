@@ -22,7 +22,7 @@ const Products = () => {
           secondColor="green"
           language={language}
         ></ProductCard>
-        <ProductCard
+        {/* <ProductCard
           title="LBSS Cloud"
           bodyContent={getText("#PRODUCTS_PRESENTATION_LBSSCLOUD", language)}
           linkID="LINK_TO_LBSSCLOUD"
@@ -30,7 +30,7 @@ const Products = () => {
           mainColor="blue"
           secondColor="pink"
           language={language}
-        ></ProductCard>
+        ></ProductCard> */}
       </div>
     </main>
   );

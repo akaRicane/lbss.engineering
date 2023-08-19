@@ -13,6 +13,7 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ callback }) => {
   return (
     <>
+      <div className="astar-title">ASTAR</div>
       <div className="astar-navigation">
         <button className="astar-navigation-btn" onClick={() => callback({ target: "navigation", section: "overview" })}>
           overview
