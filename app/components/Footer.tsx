@@ -7,9 +7,12 @@ import HoveredLink from "./HoveredLink";
 import "../styles/components.header.footer.css";
 
 const Footer = () => {
-  const { getText, currentMouseOver, version, language, updateLanguage, curLocation } = useCoreContext();
+  const { getText, currentMouseOver, version, language, updateLanguage, curLocation, isHovering } = useCoreContext();
   const [pathname, setPathname] = useState(curLocation);
   const [showLanguagesOptions, setShowLanguagesOptions] = useState<boolean>(false);
+  const [footerStyle, setFooterStyle] = useState({
+    backgroundColor: "var(--bgn-color-2)",
+  });
 
   const handleOnMouseOverLanguage = () => {
     setShowLanguagesOptions(true);
@@ -21,12 +24,14 @@ const Footer = () => {
 
   useEffect(() => {
     setPathname(curLocation);
-  }, [curLocation]);
-
-  const activeHeaderText = currentMouseOver ? currentMouseOver : getText("HEADER_WELCOME", language);
-  const footerStyle = {
-    backgroundColor: activeHeaderText == getText("HEADER_WELCOME", language) ? 'var(--bgn-color-2)' : 'var(--bgn-color-3)', 
-  };
+    isHovering
+      ? setFooterStyle({
+          backgroundColor: "var(--bgn-color-3)",
+        })
+      : setFooterStyle({
+          backgroundColor: "var(--bgn-color-2)",
+        });
+  }, [curLocation, isHovering]);
 
   return (
     <main className="footer" style={footerStyle}>

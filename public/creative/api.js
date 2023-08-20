@@ -15,7 +15,7 @@ let CURSOR = { x: 0, y: 0 };
 
 window.addEventListener("message", (event) => {
   const parsed = JSON.parse(event.data);
-  console.log("Received -> ", parsed);
+  // console.log("Received -> ", parsed);
   EVENT = parsed;
 
   switch (EVENT.target) {
