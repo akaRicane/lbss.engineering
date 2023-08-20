@@ -20,13 +20,13 @@ const Products = () => {
           linkTarget="/astar"
           language={language}
         ></ProductCard>
-        <ProductCard
+        {/* <ProductCard
           title="LBSS Cloud"
           bodyContent={getText("#PRODUCTS_PRESENTATION_LBSSCLOUD", language)}
           linkID="LINK_TO_LBSSCLOUD"
           linkTarget="/betatest"
           language={language}
-        ></ProductCard>
+        ></ProductCard> */}
       </div>
     </main>
   );
