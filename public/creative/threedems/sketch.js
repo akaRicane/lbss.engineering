@@ -46,17 +46,17 @@ function animate() {
   cube.material.wireframe = false;
 
   if (HOOVERPRODUCTS.hovered) {
-    console.log("products");
+    // console.log("products");
     triggerCameraAnimation(0);
     triggerAnimation(0);
     HOOVERPRODUCTS.hovered = false;
   } else if (HOOVERABOUT.hovered) {
-    console.log("about");
+    // console.log("about");
     triggerCameraAnimation(1);
     triggerAnimation(1);
     HOOVERABOUT.hovered = false;
   } else if (HOOVERACCOUNT.hovered) {
-    console.log("account");
+    // console.log("account");
     triggerCameraAnimation(2);
     triggerAnimation(2);
     HOOVERACCOUNT.hovered = false;

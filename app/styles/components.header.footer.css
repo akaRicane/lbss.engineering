@@ -8,20 +8,28 @@
   justify-content: center;
 }
 
+.header-title {
+  z-index: 1;
+  text-align: center;
+  width: 50vw;
+}
+
 .rolling-text {
   width: 100%;
-  text-align: center;
-  display: inline-block;
-  animation: roll 15s linear infinite;
+  /* display: inline-block; */
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  animation: roll 10s linear infinite;
   background-color: transparent;
 }
 
 @keyframes roll {
   from {
-    transform: translateX(75%);
+    transform: translateX(25%);
   }
   to {
-    transform: translateX(-75%);
+    transform: translateX(-125%);
   }
 }
 
@@ -46,4 +54,3 @@
     font-size: x-small;
   }
 }
-

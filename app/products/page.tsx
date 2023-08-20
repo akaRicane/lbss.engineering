@@ -18,19 +18,15 @@ const Products = () => {
           bodyContent={getText("#PRODUCTS_PRESENTATION_ASTAR", language)}
           linkID="LINK_TO_ASTAR"
           linkTarget="/astar"
-          mainColor="red"
-          secondColor="green"
           language={language}
         ></ProductCard>
-        {/* <ProductCard
+        <ProductCard
           title="LBSS Cloud"
           bodyContent={getText("#PRODUCTS_PRESENTATION_LBSSCLOUD", language)}
           linkID="LINK_TO_LBSSCLOUD"
           linkTarget="/betatest"
-          mainColor="blue"
-          secondColor="pink"
           language={language}
-        ></ProductCard> */}
+        ></ProductCard>
       </div>
     </main>
   );
