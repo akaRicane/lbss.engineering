@@ -1,6 +1,8 @@
 // component: Product Card
 "use client";
 
+import { useState } from "react";
+import { useCoreContext } from "../contexts/CoreContext";
 import Link from "next/link";
 import HoveredLink from "./HoveredLink";
 import "../styles/components.productCard.css";
@@ -14,9 +16,22 @@ need:
 */
 
 const ProductCard = (props: any) => {
+  const { updateCurrentMouseOver, resetCurrentMouseOver } = useCoreContext();
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
+  const onCardMouseOver = () => {
+    setIsHovered(true);
+    updateCurrentMouseOver(props.linkID);
+  };
+
+  const onCardMouseOut = () => {
+    setIsHovered(false);
+    resetCurrentMouseOver();
+  };
+
   return (
-    <Link className="product-card" href={props.linkTarget} id={props.linkID}>
-      <p className="card-title">{props.title}</p>
+    <Link className="product-card" href={props.linkTarget} id={props.linkID} onMouseOver={onCardMouseOver} onMouseOut={onCardMouseOut}>
+      {isHovered ? <p className="card-title">Discover {props.title}</p> : <p className="card-title">{props.title}</p>}
       <p>{props.bodyContent}</p>
     </Link>
   );

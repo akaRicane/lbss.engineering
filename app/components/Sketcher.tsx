@@ -2,29 +2,51 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useCoreContext } from "../contexts/CoreContext";
-import { getKeyFromMessage } from "../languages/TextGetter";
+import { sendToCreative } from "../api/utils/creativeApi";
 
 const Sketcher = ({ sketch }: { sketch: string }) => {
-  const { getText, language, currentMouseOver } = useCoreContext();
-  const [curSketch, setCurSketch] = useState("threedems");
-
   useEffect(() => {
-    // @ts-ignore
-    switch (getKeyFromMessage(currentMouseOver, language)) {
-      case "LINK_TO_PRODUCTS":
-        setCurSketch("poc");
-        break;
-
-      case "LINK_TO_ABOUT":
-        setCurSketch("threedems");
-        break;
-    }
-  }, [currentMouseOver, language]);
+    window.addEventListener("mousemove", (event) => {
+      sendToCreative({
+        target: "cursor",
+        message: {
+          x: event.clientX,
+          y: event.clientY,
+        },
+      });
+    });
+    window.addEventListener("click", (event) => {
+      sendToCreative({
+        target: "click",
+        message: {
+          x: event.clientX,
+          y: event.clientY,
+        },
+      });
+    });
+    window.addEventListener("wheel", (event) => {
+      sendToCreative({
+        target: "wheel",
+        message: {
+          deltaX: event.deltaX,
+          deltaY: event.deltaY,
+        },
+      });
+    });
+    window.addEventListener("resize", () => {
+      sendToCreative({
+        target: "resize",
+        message: {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        },
+      });
+    });
+  }, []);
 
   return (
-    <div>
-      <iframe src={`./creative/${curSketch}/index.html`} className="w-full h-full"></iframe>
+    <div className="-z-10 w-full h-full fixed top-0 left-0 right-0">
+      <iframe id="CREATIVE_FRAME" src={`./creative/threedems/index.html`} className="w-full h-full"></iframe>
     </div>
   );
 };

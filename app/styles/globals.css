@@ -7,7 +7,8 @@
   --text-color-2: rgb(0, 0, 0);
   --text-color-link: rgb(217, 0, 241);
   --bgn-color-1: rgb(0, 0, 0);
-  --bgn-color-2: rgb(240, 200, 0);
+  --bgn-color-2: rgb(162, 0, 220);
+  --bgn-color-3: rgb(240, 200, 0);
   --text-hover-link: var(--text-color-1);
   --bgn-hover-link: var(--text-color-link);
   --threshold-mobile: 400px;

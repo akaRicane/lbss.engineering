@@ -4,13 +4,15 @@
 import { useEffect, useState } from "react";
 import { useCoreContext } from "../contexts/CoreContext";
 import HoveredLink from "./HoveredLink";
-import { TextGetter } from "../languages/TextGetter";
 import "../styles/components.header.footer.css";
 
 const Footer = () => {
-  const { getText, version, language, updateLanguage, curLocation } = useCoreContext();
+  const { getText, currentMouseOver, version, language, updateLanguage, curLocation, isHovering } = useCoreContext();
   const [pathname, setPathname] = useState(curLocation);
   const [showLanguagesOptions, setShowLanguagesOptions] = useState<boolean>(false);
+  const [footerStyle, setFooterStyle] = useState({
+    backgroundColor: "var(--bgn-color-2)",
+  });
 
   const handleOnMouseOverLanguage = () => {
     setShowLanguagesOptions(true);
@@ -22,10 +24,17 @@ const Footer = () => {
 
   useEffect(() => {
     setPathname(curLocation);
-  }, [curLocation]);
+    isHovering
+      ? setFooterStyle({
+          backgroundColor: "var(--bgn-color-3)",
+        })
+      : setFooterStyle({
+          backgroundColor: "var(--bgn-color-2)",
+        });
+  }, [curLocation, isHovering]);
 
   return (
-    <main className="footer">
+    <main className="footer" style={footerStyle}>
       <div className="centered-element">
         <div onMouseOver={handleOnMouseOverLanguage} onMouseOut={handleOnMouseOutLanguage}>
           {showLanguagesOptions ? (
@@ -34,7 +43,7 @@ const Footer = () => {
               <button onClick={() => updateLanguage("fr")}>🇫🇷</button>
             </div>
           ) : (
-            <button>{TextGetter("LANGUAGE", language)}</button>
+            <button>{getText("LANGUAGE", language)}</button>
           )}
         </div>
       </div>

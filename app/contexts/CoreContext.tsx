@@ -7,6 +7,7 @@ import { useLanguageContext } from "./LanguageContext";
 import { TextGetter } from "../languages/TextGetter";
 import EnvGetter from "../components/EnvGetter";
 import { getLocation } from "../api/utils/utils";
+import { sendToCreative } from "../api/utils/creativeApi";
 import * as jose from "jose";
 
 type HoveredHTML = string | null;
@@ -25,6 +26,7 @@ type coreContextType = {
   language: string;
   updateLanguage: (newLanguage: string) => void;
   currentMouseOver: HoveredHTML;
+  isHovering: boolean;
   updateCurrentMouseOver: (htmlElemName: HoveredHTML) => void;
   resetCurrentMouseOver: () => void;
   getText: (props: string, queryLanguage: string) => string;
@@ -44,6 +46,7 @@ const coreContextDefaultValues: coreContextType = {
   language: "en",
   updateLanguage: (newLanguage) => {},
   currentMouseOver: null,
+  isHovering: false,
   updateCurrentMouseOver: (htmlElemName) => {},
   resetCurrentMouseOver: () => {},
   getText: (props, queryLanguage) => {
@@ -66,6 +69,7 @@ export const CoreContextProvider = ({ children }: Props) => {
   const [language, setLanguage] = useState<string>("en");
   const [tokenId, setTokenId] = useState<TokenId>(null);
   const [curLocation, setCurLocation] = useState<string>(usePathname());
+  const [isHovering, setIsHovering] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
   const [currentMouseOver, setCurrentMouseOver] = useState<HoveredHTML>(null);
   const version: string = EnvGetter("APP_VERSION") || "cannot fetch version";
@@ -76,7 +80,9 @@ export const CoreContextProvider = ({ children }: Props) => {
 
   const updateLocation = (newLocation: string): void => {
     // console.log("Setting new location", newLocation);
+    sendToCreative({ target: "location", message: newLocation });
     setCurLocation(newLocation);
+    setIsHovering(false);
   };
 
   const getTokenId = (): TokenId => {
@@ -95,11 +101,15 @@ export const CoreContextProvider = ({ children }: Props) => {
   };
 
   const updateCurrentMouseOver = (htmlElemName: HoveredHTML): void => {
+    sendToCreative({ target: "mouseOver", message: htmlElemName });
     setCurrentMouseOver(htmlElemName === null ? getText("HEADER_WELCOME", language) : getText(htmlElemName, language));
+    setIsHovering(true);
   };
 
   const resetCurrentMouseOver = (): void => {
+    sendToCreative({ target: "mouseOut", message: "/" });
     setCurrentMouseOver(getText("HEADER_WELCOME", language));
+    setIsHovering(false);
   };
 
   const getText = (props: string, queryLanguage: string): string => {
@@ -137,6 +147,7 @@ export const CoreContextProvider = ({ children }: Props) => {
     currentMouseOver,
     updateCurrentMouseOver,
     resetCurrentMouseOver,
+    isHovering,
     getText,
     version,
   };
